@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "title": "Introduction to Java",
+      "year": 2024,
+      "duration": 60,
+      "domain_id": 1,
+      "Budget": 5000.00
+    },
+    {
+      "id": 2,
+      "title": "Cybersecurity Basics",
+      "year": 2024,
+      "duration": 45,
+      "domain_id": 2,
+      "Budget": 4500.00
+    }
+]

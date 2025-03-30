@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "first_name": "Sophia",
+      "last_name": "Williams",
+      "email": "sophia.williams@example.com",
+      "phone_number": "345-678-9012",
+      "type": "internal",
+      "employee_id": 1
+    },
+    {
+      "id": 2,
+      "first_name": "Daniel",
+      "last_name": "Miller",
+      "email": "daniel.miller@example.com",
+      "phone_number": "456-789-0123",
+      "type": "external",
+      "employee_id": 2
+    }
+]

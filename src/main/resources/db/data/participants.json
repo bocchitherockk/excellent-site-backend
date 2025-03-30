@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "first_name": "Alice",
+      "last_name": "Brown",
+      "email": "alice.brown@example.com",
+      "phone_number": "123-456-7890",
+      "structure_id": 1,
+      "profile_id": 1
+    },
+    {
+      "id": 2,
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "email": "bob.smith@example.com",
+      "phone_number": "234-567-8901",
+      "structure_id": 2,
+      "profile_id": 2
+    }
+]
