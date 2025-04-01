@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.green_building.excellent_training.services.RolesService;
 import org.green_building.excellent_training.entities.Role;
@@ -35,44 +34,44 @@ public class RolesController {
     // note: only one Autowired constructor is allowed, if the class has only one constructor, the @Autowired is optional
     @Autowired
     public RolesController(RolesService rolesService) {
-	this.rolesService = rolesService;
+        this.rolesService = rolesService;
     }
 
     @GetMapping({ "",  "/" }) // allow requests to both with and without trailing slash urls
     public ResponseEntity<Map<String, List<Role>>> get() {
-	Map<String, List<Role>> responseBody = new HashMap<>();
-	responseBody.put("roles", this.rolesService.getAll());
-	return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        Map<String, List<Role>> responseBody = new HashMap<>();
+        responseBody.put("roles", this.rolesService.getAll());
+        // return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, Role>> get(@PathVariable Integer id) {
-	Map<String, Role> responseBody = new HashMap<>();
-	responseBody.put("role", this.rolesService.getById(id));
-	return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        Map<String, Role> responseBody = new HashMap<>();
+        responseBody.put("role", this.rolesService.getById(id));
+        return ResponseEntity.ok(responseBody);
     }
 
     @PostMapping({ "", "/" })
     public ResponseEntity<Map<String, Role>> post(@RequestBody Role role) {
-	Role insertedRole = this.rolesService.create(role);
-	Map<String, Role> responseBody = new HashMap<>();
-	responseBody.put("created_role", insertedRole);
-	HttpStatus responseStatus = insertedRole == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
-	return new ResponseEntity<>(responseBody, responseStatus);
+        Role insertedRole = this.rolesService.create(role);
+        Map<String, Role> responseBody = new HashMap<>();
+        responseBody.put("created_role", insertedRole);
+        HttpStatus responseStatus = insertedRole == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
+        return ResponseEntity.status(responseStatus).body(responseBody);
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, Role>> put(@PathVariable Integer id, @RequestBody Role modifications) {
-	Map<String, Role> responseBody = new HashMap<>();
-	responseBody.put("updated_role", this.rolesService.updateById(id, modifications));
-	return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        Map<String, Role> responseBody = new HashMap<>();
+        responseBody.put("updated_role", this.rolesService.updateById(id, modifications));
+        return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, Role>> delete(@PathVariable Integer id) {
-	Map<String, Role> responseBody = new HashMap<>();
-	responseBody.put("deleted_role", this.rolesService.deleteById(id));
-	return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        Map<String, Role> responseBody = new HashMap<>();
+        responseBody.put("deleted_role", this.rolesService.deleteById(id));
+        return ResponseEntity.ok(responseBody);
     }
 }
-

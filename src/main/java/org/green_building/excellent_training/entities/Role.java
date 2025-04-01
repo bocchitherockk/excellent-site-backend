@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor // this is needed from when we read from the data base we need to create an empty object to store the values in it
+@NoArgsConstructor // this is needed from when we read from the database we need to create an empty object to store the values in it
 @Entity(name = "Role")
 @Table(name = "roles")
 public class Role {
@@ -33,25 +33,24 @@ public class Role {
     )
     @Column (
         name = "id",
-	unique = true,
-	nullable = false,
-	insertable = false,
-	updatable = false
+        unique = true,
+        nullable = false,
+        insertable = false,
+        updatable = false
     )
     private Integer id;
 
     /********************* name *********************/
     @Column (
         name = "name",
-	length = 50, // meaning it is a varchar(50), varchar(255) is the default, it is the same as setting columnDefinition = "varchar(50)",
-	nullable = false
+        length = 50, // meaning it is a varchar(50), varchar(255) is the default // it is the same as setting columnDefinition = "varchar(50)"
+        nullable = false
     )
     private String name;
 
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Role(String name) {
-	this.name = name;
+        this.name = name;
     }
 }
-
