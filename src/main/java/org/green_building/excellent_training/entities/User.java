@@ -1,0 +1,80 @@
+package org.green_building.excellent_training.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
+public class User {
+
+    /********************* id *********************/
+    @Id
+    @SequenceGenerator (
+        name = "users_sequence",
+        sequenceName = "users_id_seq",
+        allocationSize = 1,
+        initialValue = 1
+    )
+    @GeneratedValue (
+        strategy = GenerationType.SEQUENCE,
+        generator = "users_id_seq"	    
+    )
+    @Column (
+        name = "id",
+        unique = true,
+        nullable = false,
+        insertable = false,
+        updatable = false
+    )
+    private Integer id;
+
+    /********************* username *********************/
+    @Column (
+        name = "username",
+        length = 100,
+        unique = true,
+        nullable = false
+    )
+    private String username;
+
+    /********************* password *********************/
+    @Column (
+        name = "password",
+        length = 255,
+        nullable = true // maybe in the future we will add something like oauth2 authentication
+    )
+    private String password;
+
+    /********************* role_id *********************/
+    @ManyToOne
+    @JoinColumn (
+        name = "role_id", // the name of the foreign key column in the database
+        nullable = false
+    )
+    @JsonBackReference
+    private Role role;
+
+
+    // a constructor that does not have the field 'id' because it is auto generated
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+}

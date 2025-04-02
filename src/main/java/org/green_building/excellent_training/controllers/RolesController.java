@@ -1,27 +1,25 @@
 package org.green_building.excellent_training.controllers;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-import org.green_building.excellent_training.services.RolesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import org.green_building.excellent_training.entities.Role;
+import org.green_building.excellent_training.services.RolesService;
 
 @RestController
 @RequestMapping("/roles")
@@ -62,9 +60,16 @@ public class RolesController {
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
-    public ResponseEntity<Map<String, Role>> put(@PathVariable Integer id, @RequestBody Role modifications) {
+    public ResponseEntity<Map<String, Role>> put(@PathVariable Integer id, @RequestBody Role updates) {
         Map<String, Role> responseBody = new HashMap<>();
-        responseBody.put("updated_role", this.rolesService.updateById(id, modifications));
+        responseBody.put("updated_role", this.rolesService.updateById(id, updates));
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @DeleteMapping({ "", "/" })
+    public ResponseEntity<Map<String, List<Role>>> delete() {
+        Map<String, List<Role>> responseBody = new HashMap<>();
+        responseBody.put("deleted_roles", this.rolesService.deleteAll());
         return ResponseEntity.ok(responseBody);
     }
 

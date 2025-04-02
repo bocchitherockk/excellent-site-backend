@@ -1,10 +1,9 @@
 package org.green_building.excellent_training.services;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.repositories.RolesRepository;
@@ -37,6 +36,12 @@ public class RolesService {
         if (role == null) return null;
         if (updates.getName() != null) role.setName(updates.getName());
         return this.rolesRepository.save(role);
+    }
+
+    public List<Role> deleteAll() {
+        List<Role> roles = this.rolesRepository.findAll();
+        this.rolesRepository.deleteAll();
+        return roles;
     }
 
     public Role deleteById(Integer id) {
