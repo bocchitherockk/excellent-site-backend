@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +52,7 @@ public class UsersController {
     }
 
     @PostMapping({ "", "/" })
-    public ResponseEntity<Map<String, UserDto>> post(@RequestBody UserDto userDto) {
+    public ResponseEntity<Map<String, UserDto>> post(@Valid @RequestBody UserDto userDto) {
         UserDto createdUserDto = this.usersService.create(userDto);
         Map<String, UserDto> responseBody = new HashMap<>();
         responseBody.put("created_user", createdUserDto);

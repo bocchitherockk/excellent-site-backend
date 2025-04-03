@@ -3,6 +3,8 @@ package org.green_building.excellent_training.dtos;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +17,10 @@ import org.green_building.excellent_training.entities.Role;
 @Data
 @NoArgsConstructor
 public class RoleDto {
+
     private Integer id;
+
+    @NotBlank// (message = "name of the rile should not be empty") // i won't bother changing anything
     private String name;
 
     public RoleDto(String name) {

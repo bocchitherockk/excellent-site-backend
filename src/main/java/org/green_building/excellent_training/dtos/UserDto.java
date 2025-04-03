@@ -3,6 +3,8 @@ package org.green_building.excellent_training.dtos;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -17,9 +19,15 @@ import org.green_building.excellent_training.entities.User;
 @Data
 @NoArgsConstructor
 public class UserDto {
+
     private Integer id;
+
+    @NotBlank
     private String username;
+
+    @NotBlank
     private String password;
+
     @JsonProperty("role_id") // receive role_id in the json request body
     private Integer roleId;
 

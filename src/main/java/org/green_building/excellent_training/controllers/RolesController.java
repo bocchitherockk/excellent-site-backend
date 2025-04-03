@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +55,7 @@ public class RolesController {
     }
 
     @PostMapping({ "", "/" })
-    public ResponseEntity<Map<String, RoleDto>> post(@RequestBody RoleDto roleDto) {
+    public ResponseEntity<Map<String, RoleDto>> post(@Valid @RequestBody RoleDto roleDto) {
         RoleDto createdRoleDto = this.rolesService.create(roleDto);
         Map<String, RoleDto> responseBody = new HashMap<>();
         responseBody.put("created_role", createdRoleDto);
@@ -62,6 +64,7 @@ public class RolesController {
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
+    // we will not Validate the dto coming here because not everything is required to br changed
     public ResponseEntity<Map<String, RoleDto>> put(@PathVariable Integer id, @RequestBody RoleDto updatesDto) {
         RoleDto updatedRoleDto = this.rolesService.updateById(id, updatesDto);
         Map<String, RoleDto> responseBody = new HashMap<>();
