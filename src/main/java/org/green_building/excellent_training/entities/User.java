@@ -88,9 +88,9 @@ public class User {
     // dto
     public static User from(UserDto userDto) {
         if (userDto == null) return null;
-        Role role = Role.builder()
-            .id(userDto.getRoleId())
-            .build();
+        Role role = userDto.getRoleId() == null ?
+            null /* in case we are building a user out of put request modifications */ :
+            Role.builder().id(userDto.getRoleId()).build();
         return User.builder()
             .id(userDto.getId())
             .username(userDto.getUsername())

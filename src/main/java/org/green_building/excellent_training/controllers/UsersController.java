@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.dtos.UserDto;
 import org.green_building.excellent_training.services.UsersService;
 
@@ -36,8 +35,7 @@ public class UsersController {
 
     @GetMapping({ "",  "/" })
     public ResponseEntity<Map<String, List<UserDto>>> get() {
-        List<User> users = this.usersService.getAll();
-        List<UserDto> usersDto = UserDto.from(users);
+        List<UserDto> usersDto = this.usersService.getAll();
         Map<String, List<UserDto>> responseBody = new HashMap<>();
         responseBody.put("users", usersDto);
         return ResponseEntity.ok(responseBody);
@@ -45,8 +43,7 @@ public class UsersController {
 
     @GetMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, UserDto>> get(@PathVariable Integer id) {
-        User user = this.usersService.getById(id);
-        UserDto userDto = UserDto.from(user);
+        UserDto userDto = this.usersService.getById(id);
         Map<String, UserDto> responseBody = new HashMap<>();
         responseBody.put("user", userDto);
         return ResponseEntity.ok(responseBody);
@@ -54,9 +51,7 @@ public class UsersController {
 
     @PostMapping({ "", "/" })
     public ResponseEntity<Map<String, UserDto>> post(@RequestBody UserDto userDto) {
-	    User user = User.from(userDto);
-        User createdUser = this.usersService.create(user);
-    	UserDto createdUserDto = UserDto.from(createdUser);
+        UserDto createdUserDto = this.usersService.create(userDto);
         Map<String, UserDto> responseBody = new HashMap<>();
         responseBody.put("created_user", createdUserDto);
         HttpStatus responseStatus = createdUserDto == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
@@ -65,9 +60,7 @@ public class UsersController {
 
     @PutMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, UserDto>> put(@PathVariable Integer id, @RequestBody UserDto updatesDto) {
-        User updates = User.from(updatesDto);
-        User updatedUser = this.usersService.updateById(id, updates);
-        UserDto updatedUserDto = UserDto.from(updatedUser);
+        UserDto updatedUserDto = this.usersService.updateById(id, updatesDto);
         Map<String, UserDto> responseBody = new HashMap<>();
         responseBody.put("updated_user", updatedUserDto);
         return ResponseEntity.ok(responseBody);
@@ -75,8 +68,7 @@ public class UsersController {
 
     @DeleteMapping({ "", "/" })
     public ResponseEntity<Map<String, List<UserDto>>> delete() {
-        List<User> deletedUsers = this.usersService.deleteAll();
-        List<UserDto> deletedUsersDto = UserDto.from(deletedUsers);
+        List<UserDto> deletedUsersDto = this.usersService.deleteAll();
         Map<String, List<UserDto>> responseBody = new HashMap<>();
         responseBody.put("deleted_users", deletedUsersDto);
         return ResponseEntity.ok(responseBody);
@@ -84,8 +76,7 @@ public class UsersController {
 
     @DeleteMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, UserDto>> delete(@PathVariable Integer id) {
-        User deletedUser = this.usersService.deleteById(id);
-        UserDto deletedUserDto = UserDto.from(deletedUser);
+        UserDto deletedUserDto = this.usersService.deleteById(id);
         Map<String, UserDto> responseBody = new HashMap<>();
         responseBody.put("deleted_user", deletedUserDto);
         return ResponseEntity.ok(responseBody);

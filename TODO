@@ -1,0 +1,8 @@
+/******************** TODO ********************/
+- add DTO design for roles
+- sending a post request to '/users' to attempt to create a user with an existing username throws an exception. make it return { "created_user": null } or something
+
+/******************** DONE ********************/
+- change DTO logic inside the service layer and not the controller
+
+CANCELLED:

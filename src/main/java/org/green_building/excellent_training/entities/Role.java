@@ -37,7 +37,7 @@ public class Role {
     )
     @GeneratedValue (
         strategy = GenerationType.SEQUENCE,
-        generator = "roles_id_seq"	    
+        generator = "roles_id_seq"
     )
     @Column (
         name = "id",
