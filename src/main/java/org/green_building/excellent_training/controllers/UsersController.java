@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.dtos.UserDto;
 import org.green_building.excellent_training.services.UsersService;
 
 @RestController
@@ -34,47 +35,59 @@ public class UsersController {
     }
 
     @GetMapping({ "",  "/" })
-    public ResponseEntity<Map<String, List<User>>> get() {
-        Map<String, List<User>> responseBody = new HashMap<>();
-        responseBody.put("users", this.usersService.getAll());
+    public ResponseEntity<Map<String, List<UserDto>>> get() {
+        List<User> users = this.usersService.getAll();
+        List<UserDto> usersDto = UserDto.from(users);
+        Map<String, List<UserDto>> responseBody = new HashMap<>();
+        responseBody.put("users", usersDto);
         return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping({ "/{id}", "/{id}/" })
-    public ResponseEntity<Map<String, User>> get(@PathVariable Integer id) {
-        Map<String, User> responseBody = new HashMap<>();
-        responseBody.put("user", this.usersService.getById(id));
+    public ResponseEntity<Map<String, UserDto>> get(@PathVariable Integer id) {
+        User user = this.usersService.getById(id);
+        UserDto userDto = UserDto.from(user);
+        Map<String, UserDto> responseBody = new HashMap<>();
+        responseBody.put("user", userDto);
         return ResponseEntity.ok(responseBody);
     }
 
     @PostMapping({ "", "/" })
-    public ResponseEntity<Map<String, User>> post(@RequestBody User user) {
-        System.out.println("got user from the request body: " + user);
-        User insertedUser = this.usersService.create(user);
-        Map<String, User> responseBody = new HashMap<>();
-        responseBody.put("created_user", insertedUser);
-        HttpStatus responseStatus = insertedUser == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
+    public ResponseEntity<Map<String, UserDto>> post(@RequestBody UserDto userDto) {
+	    User user = User.from(userDto);
+        User createdUser = this.usersService.create(user);
+    	UserDto createdUserDto = UserDto.from(createdUser);
+        Map<String, UserDto> responseBody = new HashMap<>();
+        responseBody.put("created_user", createdUserDto);
+        HttpStatus responseStatus = createdUserDto == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
         return ResponseEntity.status(responseStatus).body(responseBody);
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
-    public ResponseEntity<Map<String, User>> put(@PathVariable Integer id, @RequestBody User updates) {
-        Map<String, User> responseBody = new HashMap<>();
-        responseBody.put("updated_user", this.usersService.updateById(id, updates));
+    public ResponseEntity<Map<String, UserDto>> put(@PathVariable Integer id, @RequestBody UserDto updatesDto) {
+        User updates = User.from(updatesDto);
+        User updatedUser = this.usersService.updateById(id, updates);
+        UserDto updatedUserDto = UserDto.from(updatedUser);
+        Map<String, UserDto> responseBody = new HashMap<>();
+        responseBody.put("updated_user", updatedUserDto);
         return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping({ "", "/" })
-    public ResponseEntity<Map<String, List<User>>> delete() {
-        Map<String, List<User>> responseBody = new HashMap<>();
-        responseBody.put("deleted_users", this.usersService.deleteAll());
+    public ResponseEntity<Map<String, List<UserDto>>> delete() {
+        List<User> deletedUsers = this.usersService.deleteAll();
+        List<UserDto> deletedUsersDto = UserDto.from(deletedUsers);
+        Map<String, List<UserDto>> responseBody = new HashMap<>();
+        responseBody.put("deleted_users", deletedUsersDto);
         return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping({ "/{id}", "/{id}/" })
-    public ResponseEntity<Map<String, User>> delete(@PathVariable Integer id) {
-        Map<String, User> responseBody = new HashMap<>();
-        responseBody.put("deleted_user", this.usersService.deleteById(id));
+    public ResponseEntity<Map<String, UserDto>> delete(@PathVariable Integer id) {
+        User deletedUser = this.usersService.deleteById(id);
+        UserDto deletedUserDto = UserDto.from(deletedUser);
+        Map<String, UserDto> responseBody = new HashMap<>();
+        responseBody.put("deleted_user", deletedUserDto);
         return ResponseEntity.ok(responseBody);
     }
 }

@@ -1,5 +1,8 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -13,11 +16,15 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import org.green_building.excellent_training.dtos.UserDto;
+
 @AllArgsConstructor
+@Builder
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
@@ -33,7 +40,7 @@ public class User {
     )
     @GeneratedValue (
         strategy = GenerationType.SEQUENCE,
-        generator = "users_id_seq"	    
+        generator = "users_id_seq"
     )
     @Column (
         name = "id",
@@ -61,7 +68,7 @@ public class User {
     )
     private String password;
 
-    /********************* role_id *********************/
+    /********************* role *********************/
     @ManyToOne
     @JoinColumn (
         name = "role_id", // the name of the foreign key column in the database
@@ -76,5 +83,26 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    // dto
+    public static User from(UserDto userDto) {
+        if (userDto == null) return null;
+        Role role = Role.builder()
+            .id(userDto.getRoleId())
+            .build();
+        return User.builder()
+            .id(userDto.getId())
+            .username(userDto.getUsername())
+            .password(userDto.getPassword())
+            .role(role)
+            .build();
+    }
+
+    public static List<User> from(List<UserDto> usersDto) {
+    if (usersDto == null) return null;
+        return usersDto.stream()
+            .map(userDto -> User.from(userDto))
+            .collect(Collectors.toList());
     }
 }

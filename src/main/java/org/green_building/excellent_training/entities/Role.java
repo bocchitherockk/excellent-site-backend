@@ -15,11 +15,13 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
+@Builder
+@Data
 @NoArgsConstructor // this is needed from when we read from the database we need to create an empty object to store the values in it
 @Entity(name = "Role")
 @Table(name = "roles")
