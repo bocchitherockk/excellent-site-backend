@@ -100,7 +100,7 @@ public class User {
     }
 
     public static List<User> from(List<UserDto> usersDto) {
-    if (usersDto == null) return null;
+        if (usersDto == null) return null;
         return usersDto.stream()
             .map(userDto -> User.from(userDto))
             .collect(Collectors.toList());

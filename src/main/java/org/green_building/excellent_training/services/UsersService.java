@@ -27,7 +27,6 @@ public class UsersService {
     }
 
     public UserDto getById(Integer id) {
-        // findById(id) returns Optional<Role>
         User user = this.usersRepository.findById(id).orElse(null);
         return UserDto.from(user);
     }
