@@ -1,6 +1,7 @@
 package org.green_building.excellent_training.entities;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -18,6 +19,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.green_building.excellent_training.dtos.RoleDto;
 
 @AllArgsConstructor
 @Builder
@@ -68,5 +71,21 @@ public class Role {
     // a constructor that does not have the field 'id' because it is auto generated
     public Role(String name) {
         this.name = name;
+    }
+
+    // dto
+    public static Role from(RoleDto roleDto) {
+        if (roleDto == null) return null;
+        return Role.builder()
+            .id(roleDto.getId())
+            .name(roleDto.getName())
+            .build();
+    }
+
+    public static List<Role> from(List<RoleDto> rolesDto) {
+        if (rolesDto == null) return null;
+        return rolesDto.stream()
+            .map(roleDto -> Role.from(roleDto))
+            .collect(Collectors.toList());
     }
 }
