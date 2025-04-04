@@ -32,16 +32,19 @@ public class Role {
 
     /********************* id *********************/
     @Id
+    /*
     @SequenceGenerator (
         name = "roles_sequence",
         sequenceName = "roles_id_seq",
         allocationSize = 1,
         initialValue = 1
     )
-    @GeneratedValue (
+    */
+    @GeneratedValue/* (
         strategy = GenerationType.SEQUENCE,
         generator = "roles_id_seq"
-    )
+                     )
+    */
     @Column (
         name = "id",
         unique = true,

@@ -1,10 +1,12 @@
 /******************** TODO ********************/
-- sending a post request to '/users' to attempt to create a user with an existing username throws an exception. make it return { "created_user": null } or something
-- check for unique values for the columns set unique (return useful error messages in case of a fail)
+- implement jwt
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
 - add DTO design for roles to be consistent
 - add data integrity validation layer (request level)
+- add data integrity validation layer (database level)
+- add custom exceptions and exception handlers
+- return useful error messages
 
 CANCELLED:

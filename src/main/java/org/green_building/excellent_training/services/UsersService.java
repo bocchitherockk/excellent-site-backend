@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.green_building.excellent_training.dtos.UserDto;
+import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.exceptions.NonUniqueValueException;
+import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
 
@@ -27,31 +30,37 @@ public class UsersService {
     }
 
     public UserDto getById(Integer id) {
-        User user = this.usersRepository.findById(id).orElse(null);
+        User user = this.usersRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
         return UserDto.from(user);
     }
 
     public UserDto create(UserDto userDto) {
-        if (userDto.getUsername() == null) return null;
-        if (userDto.getPassword() == null) return null;
-        if (userDto.getRoleId()   == null) return null; // role id must be set
-        if (this.rolesRepository.findById(userDto.getRoleId()).isEmpty()) return null; // role must exist in the db
+        if (this.usersRepository.existsByUsername(userDto.getUsername()))
+            throw new NonUniqueValueException("user", "username", userDto.getUsername());
+        if (!this.rolesRepository.existsById(userDto.getRoleId()))
+            // role must exist in the db
+            throw new ResourceNotFoundException("role", "id", userDto.getRoleId());
         User user = User.from(userDto);
         User createdUser = this.usersRepository.save(user);
         return UserDto.from(createdUser);
     }
 
     public UserDto updateById(Integer id, UserDto updatesDto) {
-        User updates = User.from(updatesDto);
-        User user = this.usersRepository.findById(id).orElse(null);
-        if (user == null) return null;
-        if (updates.getUsername() != null) user.setUsername(updates.getUsername());
-        if (updates.getPassword() != null) user.setPassword(updates.getPassword());
-        if (updates.getRole() != null) {
-            if (updates.getRole().getId() == null || this.rolesRepository.findById(updates.getRole().getId()).isEmpty()) {
-                return null; // role must exist in the db
+        User user = this.usersRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
+        if (updatesDto.getUsername() != null && !updatesDto.getUsername().equals(user.getUsername())) {
+            boolean usernameExists = this.usersRepository.existsByUsername(updatesDto.getUsername());
+            if (usernameExists) {
+                throw new NonUniqueValueException("user", "username", updatesDto.getUsername());
             }
-            user.setRole(updates.getRole());
+            user.setUsername(updatesDto.getUsername());
+        }
+        if (updatesDto.getPassword() != null) user.setPassword(updatesDto.getPassword());
+        if (updatesDto.getRoleId() != null) {
+            Role role = this.rolesRepository.findById(updatesDto.getRoleId())
+                .orElseThrow(() -> new ResourceNotFoundException("role", "id", updatesDto.getRoleId()));
+            user.setRole(role);
         }
         User updatedUser = this.usersRepository.save(user);
         return UserDto.from(updatedUser);
@@ -64,9 +73,9 @@ public class UsersService {
     }
 
     public UserDto deleteById(Integer id) {
-        UserDto userDto = this.getById(id); // if it doesn't exist, then this will be null
-        if (userDto == null) return null;
+        User user = this.usersRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
         this.usersRepository.deleteById(id);
-        return userDto;
+        return UserDto.from(user);
     }
 }

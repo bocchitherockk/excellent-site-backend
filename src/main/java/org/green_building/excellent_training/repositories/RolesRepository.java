@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.green_building.excellent_training.entities.Role;
 
 @Repository
-public interface RolesRepository extends JpaRepository<Role, Integer> {}
+public interface RolesRepository extends JpaRepository<Role, Integer> {
+    boolean existsByName(String name);
+    boolean existsById(Integer id);
+}

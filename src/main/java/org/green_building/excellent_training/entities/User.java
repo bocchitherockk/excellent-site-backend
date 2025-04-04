@@ -32,16 +32,7 @@ public class User {
 
     /********************* id *********************/
     @Id
-    @SequenceGenerator (
-        name = "users_sequence",
-        sequenceName = "users_id_seq",
-        allocationSize = 1,
-        initialValue = 1
-    )
-    @GeneratedValue (
-        strategy = GenerationType.SEQUENCE,
-        generator = "users_id_seq"
-    )
+    @GeneratedValue
     @Column (
         name = "id",
         unique = true,
@@ -64,7 +55,7 @@ public class User {
     @Column (
         name = "password",
         length = 255,
-        nullable = true // maybe in the future we will add something like oauth2 authentication
+        nullable = false // maybe in the future we will add something like oauth2 authentication so it will become nullable
     )
     private String password;
 

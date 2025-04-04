@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.green_building.excellent_training.entities.Role;
+import org.green_building.excellent_training.exceptions.NonUniqueValueException;
+import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.dtos.RoleDto;
 import org.green_building.excellent_training.repositories.RolesRepository;
 
@@ -24,23 +26,31 @@ public class RolesService {
     }
 
     public RoleDto getById(Integer id) {
-        // findById(id) returns Optional<Role>
-        Role role = this.rolesRepository.findById(id).orElse(null);
+        Role role = this.rolesRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("role", "id", id));
         return RoleDto.from(role);
     }
 
     public RoleDto create(RoleDto roleDto) {
-        if (roleDto.getName() == null/* || this.rolesRepository.findByName(roleDto.getName()).isPresent()*/) return null; // TODO: check this commented line, in case in the future you want to check for unique values(if you will then do that across all the projects) (if ou will do so then make sure to give back useful response errors to the frontend in case of a fail)
+        if (this.rolesRepository.existsByName(roleDto.getName())) {
+            // roleDto.getName() is not null because it is checked by request validation mechanism
+            throw new NonUniqueValueException("role", "name", roleDto.getName());
+        }
         Role role = Role.from(roleDto);
         Role createdRole = this.rolesRepository.save(role);
         return RoleDto.from(createdRole);
     }
 
     public RoleDto updateById(Integer id, RoleDto updatesDto) {
-        Role updates = Role.from(updatesDto);
-        Role role = this.rolesRepository.findById(id).orElse(null);
-        if (role == null) return null;
-        if (updates.getName() != null) role.setName(updates.getName());
+        Role role = this.rolesRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("role", "id", id));
+        if (updatesDto.getName() != null && !updatesDto.getName().equals(role.getName())) {
+            boolean nameExists = this.rolesRepository.existsByName(updatesDto.getName());
+            if (nameExists) {
+                throw new NonUniqueValueException("role", "name", updatesDto.getName());
+            }
+            role.setName(updatesDto.getName());
+        }
         Role updatedRole = this.rolesRepository.save(role);
         return RoleDto.from(updatedRole);
     }
@@ -52,9 +62,9 @@ public class RolesService {
     }
 
     public RoleDto deleteById(Integer id) {
-        RoleDto roleDto = this.getById(id); // if it doesn't exist, then this will be null
-        if (roleDto == null) return null;
+        Role role = this.rolesRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("role", "id", id));
         this.rolesRepository.deleteById(id);
-        return roleDto;
+        return RoleDto.from(role);
     }
 }
