@@ -1,5 +1,5 @@
 /******************** TODO ********************/
-- implement jwt
+- seperate RequestDto from ResponseDto
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -8,5 +8,6 @@
 - add data integrity validation layer (database level)
 - add custom exceptions and exception handlers
 - return useful error messages
+- implement jwt
 
 CANCELLED:

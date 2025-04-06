@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
@@ -17,31 +18,36 @@ public class App {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(RolesRepository rolesRepository, UsersRepository usersRepository) {
+    CommandLineRunner commandLineRunner(
+            RolesRepository rolesRepository, 
+            UsersRepository usersRepository,
+            PasswordEncoder passwordEncoder) {
         return args -> {
-            rolesRepository.save(new Role("role 1"));
-            rolesRepository.save(new Role("role 2"));
-            rolesRepository.save(new Role("role 3"));
+            // Create roles
+            Role userRole        = rolesRepository.save(new Role(Role.USER));
+            Role responsibleRole = rolesRepository.save(new Role(Role.RESPONSIBLE));
+            Role adminRole       = rolesRepository.save(new Role(Role.ADMIN));
 
+            // Create users with encoded passwords
             usersRepository.save(
                 new User(
-                    "user 1",
-                    "password 1",
-                    rolesRepository.findById(1).get()
+                    "username user 1",
+                    passwordEncoder.encode("password 1"),
+                    userRole
                 )
             );
             usersRepository.save(
                 new User(
-                    "user 2",
-                    "password 2",
-                    rolesRepository.findById(2).get()
+                    "username responsible 2",
+                    passwordEncoder.encode("password 2"),
+                    responsibleRole
                 )
             );
             usersRepository.save(
                 new User(
-                    "user 3",
-                    "password 3",
-                    rolesRepository.findById(3).get()
+                    "username admin 3",
+                    passwordEncoder.encode("password 3"),
+                    adminRole
                 )
             );
         };

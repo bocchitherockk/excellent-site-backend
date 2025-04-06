@@ -30,6 +30,10 @@ import org.green_building.excellent_training.dtos.RoleDto;
 @Table(name = "roles")
 public class Role {
 
+    public static final String USER        = "USER";
+    public static final String RESPONSIBLE = "RESPONSIBLE";
+    public static final String ADMIN       = "ADMIN";
+
     /********************* id *********************/
     @Id
     /*

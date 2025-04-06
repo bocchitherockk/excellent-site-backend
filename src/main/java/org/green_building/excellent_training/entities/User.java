@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,6 +58,7 @@ public class User {
         length = 255,
         nullable = false // maybe in the future we will add something like oauth2 authentication so it will become nullable
     )
+    // @JsonIgnore // this is needed to avoid sending the password in the response
     private String password;
 
     /********************* role *********************/
