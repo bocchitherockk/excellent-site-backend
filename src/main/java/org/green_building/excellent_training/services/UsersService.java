@@ -2,9 +2,6 @@ package org.green_building.excellent_training.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import org.green_building.excellent_training.dtos.UserDto;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
@@ -12,6 +9,8 @@ import org.green_building.excellent_training.exceptions.NonUniqueValueException;
 import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UsersService {

@@ -1,15 +1,14 @@
 package org.green_building.excellent_training;
 
+import org.green_building.excellent_training.entities.Role;
+import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.repositories.RolesRepository;
+import org.green_building.excellent_training.repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import org.green_building.excellent_training.entities.Role;
-import org.green_building.excellent_training.entities.User;
-import org.green_building.excellent_training.repositories.RolesRepository;
-import org.green_building.excellent_training.repositories.UsersRepository;
 
 @SpringBootApplication
 public class App {

@@ -3,17 +3,16 @@ package org.green_building.excellent_training.dtos;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Min;
+import org.green_building.excellent_training.entities.User;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import org.green_building.excellent_training.entities.User;
 
 @AllArgsConstructor
 @Builder
