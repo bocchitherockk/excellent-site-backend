@@ -3,7 +3,7 @@ package org.green_building.excellent_training.entities;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.green_building.excellent_training.dtos.ProfileRequestDto;
+import org.green_building.excellent_training.dtos.StructureRequestDto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -23,14 +23,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @NoArgsConstructor
-@Entity(name = "Profile")
-@Table(name = "profiles")
-public class Profile {
-
-    public static final String ENGINEER_3 = "ENGINEER+3";
-    public static final String ENGINEER_5 = "ENGINEER+5";
-    public static final String TECHNICIAN = "TECHNICIAN";
-    public static final String LAWYER     = "LAWYER";
+@Entity(name = "Structure")
+@Table(name = "structures")
+public class Structure {
 
     /********************* id *********************/
     @Id
@@ -55,7 +50,7 @@ public class Profile {
 
     /*
     @OneToMany (
-        mappedBy = "profile",
+        mappedBy = "structure",
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
@@ -64,22 +59,22 @@ public class Profile {
     */
 
     // a constructor that does not have the field 'id' because it is auto generated
-    public Profile(String name) {
+    public Structure(String name) {
         this.name = name;
     }
 
     // request dto
-    public static Profile from(ProfileRequestDto dto) {
+    public static Structure from(StructureRequestDto dto) {
         if (dto == null) return null;
-        return Profile.builder()
+        return Structure.builder()
             .name(dto.getName())
             .build();
     }
 
-    public static List<Profile> from(List<ProfileRequestDto> dtos) {
+    public static List<Structure> from(List<StructureRequestDto> dtos) {
         if (dtos == null) return null;
         return dtos.stream()
-            .map(dto -> Profile.from(dto))
+            .map(dto -> Structure.from(dto))
             .collect(Collectors.toList());
     }
 }

@@ -2,9 +2,11 @@ package org.green_building.excellent_training;
 
 import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
+import org.green_building.excellent_training.entities.Structure;
 import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
+import org.green_building.excellent_training.repositories.StructuresRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +25,8 @@ public class App {
             RolesRepository rolesRepository, 
             UsersRepository usersRepository,
             PasswordEncoder passwordEncoder,
-            ProfilesRepository profilesRepository) {
+            ProfilesRepository profilesRepository,
+            StructuresRepository structuresRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -40,7 +43,11 @@ public class App {
             Profile engineer_5Profile = profilesRepository.save(new Profile(Profile.ENGINEER_5));
             Profile technicianProfile = profilesRepository.save(new Profile(Profile.TECHNICIAN));
             Profile lawyerProfile     = profilesRepository.save(new Profile(Profile.LAWYER));
-            
+
+            // Create Structures
+            Structure centralTunisStructure      = structuresRepository.save(new Structure("central tunis"));
+            Structure regionalNabeulStructure    = structuresRepository.save(new Structure("regional nabeul"));
+            Structure regionalZaghouaneStructure = structuresRepository.save(new Structure("regional zaghouane"));
         };
     }
 }
