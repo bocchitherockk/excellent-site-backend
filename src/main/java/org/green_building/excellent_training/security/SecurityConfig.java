@@ -48,6 +48,7 @@ public class SecurityConfig {
                                    */
                                    .requestMatchers("/users/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/roles/**").hasRole(Role.ADMIN)
+                                   .requestMatchers("/profiles/**").hasRole(Role.ADMIN)
                                    // Add more role-based authorization rules as needed
                                    .anyRequest().authenticated()
                                    )

@@ -1,7 +1,9 @@
 package org.green_building.excellent_training;
 
+import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +22,8 @@ public class App {
     CommandLineRunner commandLineRunner(
             RolesRepository rolesRepository, 
             UsersRepository usersRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            ProfilesRepository profilesRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -28,27 +31,16 @@ public class App {
             Role adminRole       = rolesRepository.save(new Role(Role.ADMIN));
 
             // Create users with encoded passwords
-            usersRepository.save(
-                new User(
-                    "username user 1",
-                    passwordEncoder.encode("password 1"),
-                    userRole
-                )
-            );
-            usersRepository.save(
-                new User(
-                    "username responsible 2",
-                    passwordEncoder.encode("password 2"),
-                    responsibleRole
-                )
-            );
-            usersRepository.save(
-                new User(
-                    "username admin 3",
-                    passwordEncoder.encode("password 3"),
-                    adminRole
-                )
-            );
+            usersRepository.save(new User("username user 1",        passwordEncoder.encode("password 1"), userRole));
+            usersRepository.save(new User("username responsible 2", passwordEncoder.encode("password 2"), responsibleRole));
+            usersRepository.save(new User("username admin 3",       passwordEncoder.encode("password 3"), adminRole));
+
+            // Create Profiles
+            Profile engineer_3Profile = profilesRepository.save(new Profile(Profile.ENGINEER_3));
+            Profile engineer_5Profile = profilesRepository.save(new Profile(Profile.ENGINEER_5));
+            Profile technicianProfile = profilesRepository.save(new Profile(Profile.TECHNICIAN));
+            Profile lawyerProfile     = profilesRepository.save(new Profile(Profile.LAWYER));
+            
         };
     }
 }

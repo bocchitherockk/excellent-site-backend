@@ -11,5 +11,6 @@
 - implement jwt
 - seperate RoleDto into RoleRequestDto and RoleResponseDto
 - seperate UserDto into UserRequestDto and UserResponseDto
+- add profiles component
 
 CANCELLED:
