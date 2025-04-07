@@ -1,7 +1,9 @@
 package org.green_building.excellent_training.security;
 
+import org.green_building.excellent_training.entities.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -17,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    
+
     private final JwtTokenFilter jwtTokenFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -38,12 +40,17 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/roles/**").hasRole("ADMIN")
-                .requestMatchers("/users/**").hasAnyRole("ADMIN", "RESPONSIBLE")
-                // Add more role-based authorization rules as needed
-                .anyRequest().authenticated()
-            )
+                                   .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                                   .requestMatchers("/auth/login").denyAll()
+                                   /*
+                                   .requestMatchers(HttpMethod.POST, "/auth/register").hasRole(Role.ADMIN)
+                                   .requestMatchers("/auth/register").denyAll()
+                                   */
+                                   .requestMatchers("/users/**").hasRole(Role.ADMIN)
+                                   .requestMatchers("/roles/**").hasRole(Role.ADMIN)
+                                   // Add more role-based authorization rules as needed
+                                   .anyRequest().authenticated()
+                                   )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -1,12 +1,14 @@
 package org.green_building.excellent_training.security;
-
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.green_building.excellent_training.entities.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,20 +17,33 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtTokenProvider {
 
-    // Secret key for signing the JWT (in production, store this securely)
-    private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    private final SecretKey key;
 
-    // Token expiration time (24 hours)
-    //  private final long tokenValidityInMilliseconds = 24 * 60 * 60 * 1000;
+    public JwtTokenProvider(@Value("${jwt.secret-key.base64-url}") String secret) {
+        // Decode it to bytes (Base64URL to raw bytes)
+        byte[] decodedKey = Base64.getUrlDecoder().decode(secret);
+        // Create the SecretKey using HMAC-SHA512
+        key = new SecretKeySpec(decodedKey, 0, decodedKey.length, SignatureAlgorithm.HS512.getJcaName());
+    }
+
+    /*
+    public JwtTokenProvider(@Value("${jwt.secret-key.utf-8}") String secret) {
+        // Encode the string to Base64 (URL safe)
+        String base64EncodedSecret = Base64.getUrlEncoder().encodeToString(secret.getBytes());
+        // Decode it back to bytes (Base64URL to raw bytes)
+        byte[] decodedKey = Base64.getUrlDecoder().decode(base64EncodedSecret);
+        // Create the SecretKey using HMAC-SHA512
+        key = new SecretKeySpec(decodedKey, 0, decodedKey.length, SignatureAlgorithm.HS512.getJcaName());
+    }
+    */
 
     public String createToken(User user) {
         Claims claims = Jwts.claims().setSubject(user.getId().toString());
-        claims.put("role_id", user.getRole().getId());
+        claims.put("role", user.getRole().getName());
 
         Date now = new Date();
         //  Date validity = new Date(now.getTime() + tokenValidityInMilliseconds);

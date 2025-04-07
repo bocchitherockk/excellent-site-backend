@@ -45,6 +45,7 @@ public class AuthService {
         return new AuthResponseDto(token, UserResponseDto.from(user));
     }
 
+    /*
     public AuthResponseDto register(UserRequestDto request) {
         // Default role is USER if not specified
         if (request.getRoleId() == null) {
@@ -52,7 +53,7 @@ public class AuthService {
                 .orElseThrow(() -> new ResourceNotFoundException("role", "name", Role.USER));
             request.setRoleId(userRole.getId());
         }
-        
+
         // Encode password
         request.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -65,4 +66,5 @@ public class AuthService {
 
         return new AuthResponseDto(token, UserResponseDto.from(user));
     }
+    */
 }

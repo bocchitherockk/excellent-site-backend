@@ -11,17 +11,20 @@ import org.green_building.excellent_training.exceptions.ResourceNotFoundExceptio
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
     private final RolesRepository rolesRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository) {
+    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.rolesRepository = rolesRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserResponseDto> getAll() {
@@ -38,9 +41,17 @@ public class UsersService {
     public UserResponseDto create(UserRequestDto request) {
         if (this.usersRepository.existsByUsername(request.getUsername()))
             throw new NonUniqueValueException("user", "username", request.getUsername());
-        if (!this.rolesRepository.existsById(request.getRoleId()))
+        if (request.getRoleId() == null) { // if role_id is not specified, set "USER" role as default
+            Role roleUSER = rolesRepository.findByName(Role.USER).orElseThrow(() -> new ResourceNotFoundException("role", "name", Role.USER));
+            request.setRoleId(roleUSER.getId());
+        } else if (!this.rolesRepository.existsById(request.getRoleId())) {
             // role must exist in the db
             throw new ResourceNotFoundException("role", "id", request.getRoleId());
+        }
+
+        // Encode password
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+
         User user = User.from(request);
         User createdUser = this.usersRepository.save(user);
         return UserResponseDto.from(createdUser);
