@@ -2,9 +2,9 @@ package org.green_building.excellent_training.dtos;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.green_building.excellent_training.entities.Role;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +26,7 @@ public class RoleResponseDto {
         if (role == null) return null;
         return RoleResponseDto
             .builder()
+            .id(role.getId())
             .name(role.getName())
             .build();
     }

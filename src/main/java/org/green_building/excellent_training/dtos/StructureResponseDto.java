@@ -2,9 +2,9 @@ package org.green_building.excellent_training.dtos;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.green_building.excellent_training.entities.Structure;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +26,7 @@ public class StructureResponseDto {
         if (structure == null) return null;
         return StructureResponseDto
             .builder()
+            .id(structure.getId())
             .name(structure.getName())
             .build();
     }
