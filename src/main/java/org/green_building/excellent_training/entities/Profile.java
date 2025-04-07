@@ -53,7 +53,6 @@ public class Profile {
     )
     private String name;
 
-    /*
     @OneToMany (
         mappedBy = "profile",
         cascade = CascadeType.ALL,
@@ -61,7 +60,6 @@ public class Profile {
     )
     @JsonManagedReference
     private List<Participant> participants;
-    */
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Profile(String name) {

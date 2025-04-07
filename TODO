@@ -13,5 +13,6 @@
 - seperate UserDto into UserRequestDto and UserResponseDto
 - add Profile component
 - add Structure component
+- add Participant component
 
 CANCELLED:

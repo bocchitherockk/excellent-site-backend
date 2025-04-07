@@ -1,9 +1,11 @@
 package org.green_building.excellent_training;
 
+import org.green_building.excellent_training.entities.Participant;
 import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.Structure;
 import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.repositories.ParticipantsRepository;
 import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.StructuresRepository;
@@ -26,7 +28,8 @@ public class App {
             UsersRepository usersRepository,
             PasswordEncoder passwordEncoder,
             ProfilesRepository profilesRepository,
-            StructuresRepository structuresRepository) {
+            StructuresRepository structuresRepository,
+            ParticipantsRepository participantsRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -48,6 +51,32 @@ public class App {
             Structure centralTunisStructure      = structuresRepository.save(new Structure("central tunis"));
             Structure regionalNabeulStructure    = structuresRepository.save(new Structure("regional nabeul"));
             Structure regionalZaghouaneStructure = structuresRepository.save(new Structure("regional zaghouane"));
+
+            // Create Participants
+            participantsRepository.save(new Participant(
+                "email@email_1.com",
+                "first name 1",
+                "last name 1",
+                12345678,
+                engineer_3Profile,
+                centralTunisStructure
+            ));
+            participantsRepository.save(new Participant(
+                "email@email_2.com",
+                "first name 2",
+                "last name 2",
+                12345678,
+                engineer_5Profile,
+                regionalNabeulStructure
+            ));
+            participantsRepository.save(new Participant(
+                "email@email_3.com",
+                "first name 3",
+                "last name 3",
+                12345678,
+                technicianProfile,
+                regionalZaghouaneStructure
+            ));
         };
     }
 }

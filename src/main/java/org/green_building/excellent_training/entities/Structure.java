@@ -48,7 +48,6 @@ public class Structure {
     )
     private String name;
 
-    /*
     @OneToMany (
         mappedBy = "structure",
         cascade = CascadeType.ALL,
@@ -56,7 +55,6 @@ public class Structure {
     )
     @JsonManagedReference
     private List<Participant> participants;
-    */
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Structure(String name) {
