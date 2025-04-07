@@ -3,7 +3,7 @@ package org.green_building.excellent_training.entities;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.green_building.excellent_training.dtos.UserDto;
+import org.green_building.excellent_training.dtos.UserRequestDto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -74,23 +74,21 @@ public class User {
     }
 
     // dto
-    public static User from(UserDto userDto) {
-        if (userDto == null) return null;
-        Role role = userDto.getRoleId() == null ?
-            null /* in case we are building a user out of put request modifications */ :
-            Role.builder().id(userDto.getRoleId()).build();
+    public static User from(UserRequestDto dto) {
+        if (dto == null) return null;
+        /* in case we are building a user out of put request modifications */
+        Role role = dto.getRoleId() == null ? null : Role.builder().id(dto.getRoleId()).build();
         return User.builder()
-            .id(userDto.getId())
-            .username(userDto.getUsername())
-            .password(userDto.getPassword())
+            .username(dto.getUsername())
+            .password(dto.getPassword())
             .role(role)
             .build();
     }
 
-    public static List<User> from(List<UserDto> usersDto) {
-        if (usersDto == null) return null;
-        return usersDto.stream()
-            .map(userDto -> User.from(userDto))
+    public static List<User> from(List<UserRequestDto> dtos) {
+        if (dtos == null) return null;
+        return dtos.stream()
+            .map(dto -> User.from(dto))
             .collect(Collectors.toList());
     }
 }

@@ -24,21 +24,21 @@ public class JwtTokenProvider {
     private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     // Token expiration time (24 hours)
-    private final long tokenValidityInMilliseconds = 24 * 60 * 60 * 1000;
+    //  private final long tokenValidityInMilliseconds = 24 * 60 * 60 * 1000;
 
     public String createToken(User user) {
         Claims claims = Jwts.claims().setSubject(user.getId().toString());
-        claims.put("role", user.getRole().getName());
+        claims.put("role_id", user.getRole().getId());
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + tokenValidityInMilliseconds);
+        //  Date validity = new Date(now.getTime() + tokenValidityInMilliseconds);
 
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(key)
-                .compact();
+            .setClaims(claims)
+            .setIssuedAt(now)
+            // .setExpiration(validity)
+            .signWith(key)
+            .compact();
     }
 
     public boolean validateToken(String token) {

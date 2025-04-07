@@ -2,7 +2,7 @@ package org.green_building.excellent_training.controllers;
 
 import org.green_building.excellent_training.dtos.AuthRequestDto;
 import org.green_building.excellent_training.dtos.AuthResponseDto;
-import org.green_building.excellent_training.dtos.UserDto;
+import org.green_building.excellent_training.dtos.UserRequestDto;
 import org.green_building.excellent_training.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDto> register(@Valid @RequestBody UserDto userDto) {
-        return ResponseEntity.ok(authService.register(userDto)); 
+    public ResponseEntity<AuthResponseDto> register(@Valid @RequestBody UserRequestDto user) {
+        return ResponseEntity.ok(authService.register(user));
     }
 }

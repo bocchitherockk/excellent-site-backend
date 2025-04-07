@@ -2,7 +2,8 @@ package org.green_building.excellent_training.services;
 
 import java.util.List;
 
-import org.green_building.excellent_training.dtos.UserDto;
+import org.green_building.excellent_training.dtos.UserRequestDto;
+import org.green_building.excellent_training.dtos.UserResponseDto;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.exceptions.NonUniqueValueException;
@@ -23,58 +24,58 @@ public class UsersService {
         this.rolesRepository = rolesRepository;
     }
 
-    public List<UserDto> getAll() {
+    public List<UserResponseDto> getAll() {
         List<User> users = this.usersRepository.findAll();
-        return UserDto.from(users);
+        return UserResponseDto.from(users);
     }
 
-    public UserDto getById(Integer id) {
+    public UserResponseDto getById(Integer id) {
         User user = this.usersRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
-        return UserDto.from(user);
+        return UserResponseDto.from(user);
     }
 
-    public UserDto create(UserDto userDto) {
-        if (this.usersRepository.existsByUsername(userDto.getUsername()))
-            throw new NonUniqueValueException("user", "username", userDto.getUsername());
-        if (!this.rolesRepository.existsById(userDto.getRoleId()))
+    public UserResponseDto create(UserRequestDto request) {
+        if (this.usersRepository.existsByUsername(request.getUsername()))
+            throw new NonUniqueValueException("user", "username", request.getUsername());
+        if (!this.rolesRepository.existsById(request.getRoleId()))
             // role must exist in the db
-            throw new ResourceNotFoundException("role", "id", userDto.getRoleId());
-        User user = User.from(userDto);
+            throw new ResourceNotFoundException("role", "id", request.getRoleId());
+        User user = User.from(request);
         User createdUser = this.usersRepository.save(user);
-        return UserDto.from(createdUser);
+        return UserResponseDto.from(createdUser);
     }
 
-    public UserDto updateById(Integer id, UserDto updatesDto) {
+    public UserResponseDto updateById(Integer id, UserRequestDto updates) {
         User user = this.usersRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
-        if (updatesDto.getUsername() != null && !updatesDto.getUsername().equals(user.getUsername())) {
-            boolean usernameExists = this.usersRepository.existsByUsername(updatesDto.getUsername());
+        if (updates.getUsername() != null && !updates.getUsername().equals(user.getUsername())) {
+            boolean usernameExists = this.usersRepository.existsByUsername(updates.getUsername());
             if (usernameExists) {
-                throw new NonUniqueValueException("user", "username", updatesDto.getUsername());
+                throw new NonUniqueValueException("user", "username", updates.getUsername());
             }
-            user.setUsername(updatesDto.getUsername());
+            user.setUsername(updates.getUsername());
         }
-        if (updatesDto.getPassword() != null) user.setPassword(updatesDto.getPassword());
-        if (updatesDto.getRoleId() != null) {
-            Role role = this.rolesRepository.findById(updatesDto.getRoleId())
-                .orElseThrow(() -> new ResourceNotFoundException("role", "id", updatesDto.getRoleId()));
+        if (updates.getPassword() != null) user.setPassword(updates.getPassword());
+        if (updates.getRoleId() != null) {
+            Role role = this.rolesRepository.findById(updates.getRoleId())
+                .orElseThrow(() -> new ResourceNotFoundException("role", "id", updates.getRoleId()));
             user.setRole(role);
         }
         User updatedUser = this.usersRepository.save(user);
-        return UserDto.from(updatedUser);
+        return UserResponseDto.from(updatedUser);
     }
 
-    public List<UserDto> deleteAll() {
+    public List<UserResponseDto> deleteAll() {
         List<User> users = this.usersRepository.findAll();
         this.usersRepository.deleteAll();
-        return UserDto.from(users);
+        return UserResponseDto.from(users);
     }
 
-    public UserDto deleteById(Integer id) {
+    public UserResponseDto deleteById(Integer id) {
         User user = this.usersRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
         this.usersRepository.deleteById(id);
-        return UserDto.from(user);
+        return UserResponseDto.from(user);
     }
 }

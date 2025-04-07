@@ -3,7 +3,7 @@ package org.green_building.excellent_training.entities;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.green_building.excellent_training.dtos.RoleDto;
+import org.green_building.excellent_training.dtos.RoleRequestDto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -44,7 +44,7 @@ public class Role {
     @GeneratedValue/* (
         strategy = GenerationType.SEQUENCE,
         generator = "roles_id_seq"
-                     )
+        )
     */
     @Column (
         name = "id",
@@ -77,19 +77,18 @@ public class Role {
         this.name = name;
     }
 
-    // dto
-    public static Role from(RoleDto roleDto) {
-        if (roleDto == null) return null;
+    // request dto
+    public static Role from(RoleRequestDto dto) {
+        if (dto == null) return null;
         return Role.builder()
-            .id(roleDto.getId())
-            .name(roleDto.getName())
+            .name(dto.getName())
             .build();
     }
 
-    public static List<Role> from(List<RoleDto> rolesDto) {
-        if (rolesDto == null) return null;
-        return rolesDto.stream()
-            .map(roleDto -> Role.from(roleDto))
+    public static List<Role> from(List<RoleRequestDto> dtos) {
+        if (dtos == null) return null;
+        return dtos.stream()
+            .map(dto -> Role.from(dto))
             .collect(Collectors.toList());
     }
 }

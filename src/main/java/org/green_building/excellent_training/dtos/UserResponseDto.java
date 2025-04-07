@@ -18,41 +18,32 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @NoArgsConstructor
-public class UserDto {
+public class UserResponseDto {
 
     private Integer id;
-
-    @NotBlank
     private String username;
-
-    @NotBlank
-    private String password;
-
-    @JsonProperty("role_id") // receive role_id in the json request body
-    @Min(1)
+    @JsonProperty("role_id") // send role_id in the json response body
     private Integer roleId;
 
-    public UserDto(String username, String password, Integer roleId) {
+    public UserResponseDto(String username, Integer roleId) {
         this.username = username;
-        this.password = password;
         this.roleId = roleId;
     }
 
     // dto
-    public static UserDto from(User user) {
+    public static UserResponseDto from(User user) {
         if (user == null) return null;
-        return UserDto.builder()
+        return UserResponseDto.builder()
             .id(user.getId())
             .username(user.getUsername())
-            .password(user.getPassword())
             .roleId(user.getRole().getId())
             .build();
     }
 
-    public static List<UserDto> from(List<User> users) {
+    public static List<UserResponseDto> from(List<User> users) {
         if (users == null) return null;
         return users.stream()
-            .map(user -> UserDto.from(user))
+            .map(user -> UserResponseDto.from(user))
             .collect(Collectors.toList());
     }
 }

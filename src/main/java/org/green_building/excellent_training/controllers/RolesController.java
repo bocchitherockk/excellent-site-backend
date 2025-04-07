@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.green_building.excellent_training.dtos.RoleDto;
+import org.green_building.excellent_training.dtos.RoleRequestDto;
+import org.green_building.excellent_training.dtos.RoleResponseDto;
 import org.green_building.excellent_training.services.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,53 +36,53 @@ public class RolesController {
     }
 
     @GetMapping({ "",  "/" }) // allow requests to both with and without trailing slash urls
-    public ResponseEntity<Map<String, List<RoleDto>>> get() {
-        List<RoleDto> rolesDto = this.rolesService.getAll();
-        Map<String, List<RoleDto>> responseBody = new HashMap<>();
-        responseBody.put("roles", rolesDto);
+    public ResponseEntity<Map<String, List<RoleResponseDto>>> get() {
+        List<RoleResponseDto> roles = this.rolesService.getAll();
+        Map<String, List<RoleResponseDto>> responseBody = new HashMap<>();
+        responseBody.put("roles", roles);
         // return new ResponseEntity<>(responseBody, HttpStatus.OK);
         return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping({ "/{id}", "/{id}/" })
-    public ResponseEntity<Map<String, RoleDto>> get(@PathVariable Integer id) {
-        RoleDto roleDto = this.rolesService.getById(id);
-        Map<String, RoleDto> responseBody = new HashMap<>();
-        responseBody.put("role", roleDto);
+    public ResponseEntity<Map<String, RoleResponseDto>> get(@PathVariable Integer id) {
+        RoleResponseDto role = this.rolesService.getById(id);
+        Map<String, RoleResponseDto> responseBody = new HashMap<>();
+        responseBody.put("role", role);
         return ResponseEntity.ok(responseBody);
     }
 
     @PostMapping({ "", "/" })
-    public ResponseEntity<Map<String, RoleDto>> post(@Valid @RequestBody RoleDto roleDto) {
-        RoleDto createdRoleDto = this.rolesService.create(roleDto);
-        Map<String, RoleDto> responseBody = new HashMap<>();
-        responseBody.put("created_role", createdRoleDto);
-        HttpStatus responseStatus = createdRoleDto == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
+    public ResponseEntity<Map<String, RoleResponseDto>> post(@Valid @RequestBody RoleRequestDto request) {
+        RoleResponseDto response = this.rolesService.create(request);
+        HttpStatus responseStatus = response == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
+        Map<String, RoleResponseDto> responseBody = new HashMap<>();
+        responseBody.put("created_role", response);
         return ResponseEntity.status(responseStatus).body(responseBody);
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
     // we will not Validate the dto coming here because not everything is required to br changed
-    public ResponseEntity<Map<String, RoleDto>> put(@PathVariable Integer id, @RequestBody RoleDto updatesDto) {
-        RoleDto updatedRoleDto = this.rolesService.updateById(id, updatesDto);
-        Map<String, RoleDto> responseBody = new HashMap<>();
-        responseBody.put("updated_role", updatedRoleDto);
+    public ResponseEntity<Map<String, RoleResponseDto>> put(@PathVariable Integer id, @RequestBody RoleRequestDto updates) {
+        RoleResponseDto updatedRole = this.rolesService.updateById(id, updates);
+        Map<String, RoleResponseDto> responseBody = new HashMap<>();
+        responseBody.put("updated_role", updatedRole);
         return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping({ "", "/" })
-    public ResponseEntity<Map<String, List<RoleDto>>> delete() {
-        List<RoleDto> deletedRolesDto = this.rolesService.deleteAll();
-        Map<String, List<RoleDto>> responseBody = new HashMap<>();
-        responseBody.put("deleted_roles", deletedRolesDto);
+    public ResponseEntity<Map<String, List<RoleResponseDto>>> delete() {
+        List<RoleResponseDto> deletedRoles = this.rolesService.deleteAll();
+        Map<String, List<RoleResponseDto>> responseBody = new HashMap<>();
+        responseBody.put("deleted_roles", deletedRoles);
         return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping({ "/{id}", "/{id}/" })
-    public ResponseEntity<Map<String, RoleDto>> delete(@PathVariable Integer id) {
-        RoleDto deletedRoleDto = this.rolesService.deleteById(id);
-        Map<String, RoleDto> responseBody = new HashMap<>();
-        responseBody.put("deleted_role", deletedRoleDto);
+    public ResponseEntity<Map<String, RoleResponseDto>> delete(@PathVariable Integer id) {
+        RoleResponseDto deletedRole = this.rolesService.deleteById(id);
+        Map<String, RoleResponseDto> responseBody = new HashMap<>();
+        responseBody.put("deleted_role", deletedRole);
         return ResponseEntity.ok(responseBody);
     }
 }

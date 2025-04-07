@@ -1,5 +1,5 @@
 /******************** TODO ********************/
-- seperate RequestDto from ResponseDto
+
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -9,5 +9,7 @@
 - add custom exceptions and exception handlers
 - return useful error messages
 - implement jwt
+- seperate RoleDto into RoleRequestDto and RoleResponseDto
+- seperate UserDto into UserRequestDto and UserResponseDto
 
 CANCELLED:

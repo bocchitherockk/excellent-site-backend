@@ -2,7 +2,8 @@ package org.green_building.excellent_training.services;
 
 import java.util.List;
 
-import org.green_building.excellent_training.dtos.RoleDto;
+import org.green_building.excellent_training.dtos.RoleRequestDto;
+import org.green_building.excellent_training.dtos.RoleResponseDto;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.exceptions.NonUniqueValueException;
 import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
@@ -19,51 +20,49 @@ public class RolesService {
         this.rolesRepository = rolesRepository;
     }
 
-    public List<RoleDto> getAll() {
+    public List<RoleResponseDto> getAll() {
         List<Role> roles = this.rolesRepository.findAll();
-        return RoleDto.from(roles);
+        return RoleResponseDto.from(roles);
     }
 
-    public RoleDto getById(Integer id) {
+    public RoleResponseDto getById(Integer id) {
         Role role = this.rolesRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("role", "id", id));
-        return RoleDto.from(role);
+        return RoleResponseDto.from(role);
     }
 
-    public RoleDto create(RoleDto roleDto) {
-        if (this.rolesRepository.existsByName(roleDto.getName())) {
-            // roleDto.getName() is not null because it is checked by request validation mechanism
-            throw new NonUniqueValueException("role", "name", roleDto.getName());
+    public RoleResponseDto create(RoleRequestDto request) {
+        if (this.rolesRepository.existsByName(request.getName())) {
+            // request.getName() is not null because it is checked by request validation mechanism
+            throw new NonUniqueValueException("role", "name", request.getName());
         }
-        Role role = Role.from(roleDto);
+        Role role = Role.from(request);
         Role createdRole = this.rolesRepository.save(role);
-        return RoleDto.from(createdRole);
+        return RoleResponseDto.from(createdRole);
     }
 
-    public RoleDto updateById(Integer id, RoleDto updatesDto) {
+    public RoleResponseDto updateById(Integer id, RoleRequestDto updates) {
         Role role = this.rolesRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("role", "id", id));
-        if (updatesDto.getName() != null && !updatesDto.getName().equals(role.getName())) {
-            boolean nameExists = this.rolesRepository.existsByName(updatesDto.getName());
-            if (nameExists) {
-                throw new NonUniqueValueException("role", "name", updatesDto.getName());
-            }
-            role.setName(updatesDto.getName());
+        if (updates.getName() != null && !updates.getName().equals(role.getName())) {
+            if (this.rolesRepository.existsByName(updates.getName()))
+                throw new NonUniqueValueException("role", "name", updates.getName());
+            role.setName(updates.getName());
         }
         Role updatedRole = this.rolesRepository.save(role);
-        return RoleDto.from(updatedRole);
+        return RoleResponseDto.from(updatedRole);
     }
 
-    public List<RoleDto> deleteAll() {
+    public List<RoleResponseDto> deleteAll() {
         List<Role> roles = this.rolesRepository.findAll();
         this.rolesRepository.deleteAll();
-        return RoleDto.from(roles);
+        return RoleResponseDto.from(roles);
     }
 
-    public RoleDto deleteById(Integer id) {
+    public RoleResponseDto deleteById(Integer id) {
         Role role = this.rolesRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("role", "id", id));
         this.rolesRepository.deleteById(id);
-        return RoleDto.from(role);
+        return RoleResponseDto.from(role);
     }
 }

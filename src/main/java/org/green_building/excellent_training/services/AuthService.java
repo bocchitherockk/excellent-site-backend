@@ -2,7 +2,8 @@ package org.green_building.excellent_training.services;
 
 import org.green_building.excellent_training.dtos.AuthRequestDto;
 import org.green_building.excellent_training.dtos.AuthResponseDto;
-import org.green_building.excellent_training.dtos.UserDto;
+import org.green_building.excellent_training.dtos.UserRequestDto;
+import org.green_building.excellent_training.dtos.UserResponseDto;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.exceptions.AuthenticationException;
@@ -32,37 +33,36 @@ public class AuthService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    public AuthResponseDto login(AuthRequestDto request) {
-        User user = usersRepository.findByUsername(request.getUsername())
+    public AuthResponseDto login(AuthRequestDto credentials) {
+        User user = usersRepository.findByUsername(credentials.getUsername())
                 .orElseThrow(() -> new AuthenticationException("Invalid username or password"));
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(credentials.getPassword(), user.getPassword())) {
             throw new AuthenticationException("Invalid username or password");
         }
 
         String token = jwtTokenProvider.createToken(user);
-
-        return new AuthResponseDto(token, UserDto.from(user));
+        return new AuthResponseDto(token, UserResponseDto.from(user));
     }
-    
-    public AuthResponseDto register(UserDto userDto) {
+
+    public AuthResponseDto register(UserRequestDto request) {
         // Default role is USER if not specified
-        if (userDto.getRoleId() == null) {
+        if (request.getRoleId() == null) {
             Role userRole = rolesRepository.findByName(Role.USER)
                 .orElseThrow(() -> new ResourceNotFoundException("role", "name", Role.USER));
-            userDto.setRoleId(userRole.getId());
+            request.setRoleId(userRole.getId());
         }
         
         // Encode password
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
 
         // Create user
-        User user = User.from(userDto);
+        User user = User.from(request);
         user = usersRepository.save(user);
 
         // Generate token
         String token = jwtTokenProvider.createToken(user);
 
-        return new AuthResponseDto(token, UserDto.from(user));
+        return new AuthResponseDto(token, UserResponseDto.from(user));
     }
 }
