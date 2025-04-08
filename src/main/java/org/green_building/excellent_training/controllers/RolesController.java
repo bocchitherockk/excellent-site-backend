@@ -62,7 +62,7 @@ public class RolesController {
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
-    // we will not Validate the dto coming here because not everything is required to br changed
+    // we will not Validate the dto coming here because not everything is required to be changed
     public ResponseEntity<Map<String, RoleResponseDto>> put(@PathVariable Integer id, @RequestBody RoleRequestDto updates) {
         RoleResponseDto updatedRole = this.rolesService.updateById(id, updates);
         Map<String, RoleResponseDto> responseBody = new HashMap<>();

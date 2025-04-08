@@ -1,10 +1,12 @@
 package org.green_building.excellent_training;
 
+import org.green_building.excellent_training.entities.Domain;
 import org.green_building.excellent_training.entities.Participant;
 import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.Structure;
 import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.repositories.DomainsRepository;
 import org.green_building.excellent_training.repositories.ParticipantsRepository;
 import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
@@ -29,7 +31,8 @@ public class App {
             PasswordEncoder passwordEncoder,
             ProfilesRepository profilesRepository,
             StructuresRepository structuresRepository,
-            ParticipantsRepository participantsRepository) {
+            ParticipantsRepository participantsRepository,
+            DomainsRepository domainsRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -77,6 +80,11 @@ public class App {
                 technicianProfile,
                 regionalZaghouaneStructure
             ));
+
+            // Create Domains
+            Domain domain_1 = domainsRepository.save(new Domain("domain 1"));
+            Domain domain_2 = domainsRepository.save(new Domain("domain 2"));
+            Domain domain_3 = domainsRepository.save(new Domain("domain 3"));
         };
     }
 }

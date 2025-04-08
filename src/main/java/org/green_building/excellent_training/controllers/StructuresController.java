@@ -26,21 +26,18 @@ import jakarta.validation.Valid;
 // @CrossOrigin(origins = "http://localhost:6969")
 public class StructuresController {
 
-    // @Autowired // this is field injection which is not recommended, use a constructor injection instead like down below
     private final StructuresService structuresService;
 
-    // note: only one Autowired constructor is allowed, if the class has only one constructor, the @Autowired is optional
     @Autowired
     public StructuresController(StructuresService structuresService) {
         this.structuresService = structuresService;
     }
 
-    @GetMapping({ "",  "/" }) // allow requests to both with and without trailing slash urls
+    @GetMapping({ "",  "/" })
     public ResponseEntity<Map<String, List<StructureResponseDto>>> get() {
         List<StructureResponseDto> structures = this.structuresService.getAll();
         Map<String, List<StructureResponseDto>> responseBody = new HashMap<>();
         responseBody.put("structures", structures);
-        // return new ResponseEntity<>(responseBody, HttpStatus.OK);
         return ResponseEntity.ok(responseBody);
     }
 
@@ -62,7 +59,7 @@ public class StructuresController {
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
-    // we will not Validate the dto coming here because not everything is required to br changed
+    // we will not Validate the dto coming here because not everything is required to be changed
     public ResponseEntity<Map<String, StructureResponseDto>> put(@PathVariable Integer id, @RequestBody StructureRequestDto updates) {
         StructureResponseDto updatedStructure = this.structuresService.updateById(id, updates);
         Map<String, StructureResponseDto> responseBody = new HashMap<>();
