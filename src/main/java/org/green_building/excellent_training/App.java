@@ -5,12 +5,14 @@ import org.green_building.excellent_training.entities.Participant;
 import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.Structure;
+import org.green_building.excellent_training.entities.TrainingSession;
 import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.repositories.DomainsRepository;
 import org.green_building.excellent_training.repositories.ParticipantsRepository;
 import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.StructuresRepository;
+import org.green_building.excellent_training.repositories.TrainingSessionsRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,7 +34,8 @@ public class App {
             ProfilesRepository profilesRepository,
             StructuresRepository structuresRepository,
             ParticipantsRepository participantsRepository,
-            DomainsRepository domainsRepository) {
+            DomainsRepository domainsRepository,
+            TrainingSessionsRepository trainingSessionsRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -85,6 +88,29 @@ public class App {
             Domain domain_1 = domainsRepository.save(new Domain("domain 1"));
             Domain domain_2 = domainsRepository.save(new Domain("domain 2"));
             Domain domain_3 = domainsRepository.save(new Domain("domain 3"));
+
+            // Create Training Sessions
+            TrainingSession trainingSession_1 = trainingSessionsRepository.save(new TrainingSession(
+                "training session 1",
+                2023,
+                5,
+                1000.0,
+                domain_1
+            ));
+            TrainingSession trainingSession_2 = trainingSessionsRepository.save(new TrainingSession(
+                "training session 2",
+                2023,
+                10,
+                2000.0,
+                domain_2
+            ));
+            TrainingSession trainingSession_3 = trainingSessionsRepository.save(new TrainingSession(
+                "training session 3",
+                2024,
+                15,
+                3000.0,
+                domain_3
+            ));
         };
     }
 }

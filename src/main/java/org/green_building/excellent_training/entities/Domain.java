@@ -48,7 +48,7 @@ public class Domain {
     )
     private String name;
 
-    /*
+
     @OneToMany (
         mappedBy = "domain",
         cascade = CascadeType.ALL,
@@ -56,7 +56,7 @@ public class Domain {
     )
     @JsonManagedReference
     private List<TrainingSession> trainingSessions;
-    */
+
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Domain(String name) {
