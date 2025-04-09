@@ -7,11 +7,14 @@ import org.green_building.excellent_training.dtos.TrainingSessionRequestDto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -70,6 +73,15 @@ public class TrainingSession {
     )
     @JsonBackReference
     private Domain domain;
+
+    /********************* participants *********************/
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable (
+        name = "participation",
+        joinColumns = @JoinColumn (name = "training_session_id"),
+        inverseJoinColumns = @JoinColumn (name = "participant_id")
+    )
+    private List<Participant> participants;
 
     // a constructor that does not have the field 'id' because it is auto generated
     public TrainingSession(String title, Integer year, Integer durationDays, Double budget, Domain domain) {

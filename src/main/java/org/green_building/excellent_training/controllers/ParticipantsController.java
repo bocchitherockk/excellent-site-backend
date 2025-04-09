@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.green_building.excellent_training.dtos.ParticipantRequestDto;
 import org.green_building.excellent_training.dtos.ParticipantResponseDto;
+import org.green_building.excellent_training.dtos.TrainingSessionResponseDto;
 import org.green_building.excellent_training.services.ParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,13 +50,44 @@ public class ParticipantsController {
         return ResponseEntity.ok(responseBody);
     }
 
+    @GetMapping({ "/{participantId}/training_sessions", "/{participantId}/training_sessions/" })
+    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> getTrainingSessions(@PathVariable Integer participantId) {
+        List<TrainingSessionResponseDto> trainingSessions = this.participantsService.getParticipantTrainingSessionsById(participantId);
+        Map<String, List<TrainingSessionResponseDto>> responseBody = new HashMap<>();
+        responseBody.put("training_sessions", trainingSessions);
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @GetMapping({ "/{participantId}/training_sessions/{trainingSessionId}", "/{participantId}/training_sessions/{trainingSessionId}/" })
+    public ResponseEntity<Map<String, TrainingSessionResponseDto>> getTrainingSessions(@PathVariable Integer participantId, @PathVariable Integer trainingSessionId) {
+        TrainingSessionResponseDto trainingSession = this.participantsService.getParticipantTrainingSessionById(participantId, trainingSessionId);
+        Map<String, TrainingSessionResponseDto> responseBody = new HashMap<>();
+        responseBody.put("training_session", trainingSession);
+        return ResponseEntity.ok(responseBody);
+    }
+
     @PostMapping({ "", "/" })
     public ResponseEntity<Map<String, ParticipantResponseDto>> post(@Valid @RequestBody ParticipantRequestDto request) {
         ParticipantResponseDto createdParticipant = this.participantsService.create(request);
-        HttpStatus responseStatus = createdParticipant == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
         Map<String, ParticipantResponseDto> responseBody = new HashMap<>();
         responseBody.put("created_participant", createdParticipant);
-        return ResponseEntity.status(responseStatus).body(responseBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
+    }
+
+    @PostMapping({ "/{participantId}/training_sessions", "/{participantId}/training_sessions/" })
+    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> post(@PathVariable Integer participantId, @RequestBody Map<String, List<Integer>> requestBody) {
+        List<TrainingSessionResponseDto> enrolledInTrainingSessions = this.participantsService.enrollParticipantInTrainingSessions(participantId, requestBody.get("training_sessions_ids"));
+        Map<String, List<TrainingSessionResponseDto>> responseBody = new HashMap<>();
+        responseBody.put("enrolled_in_training_sessions", enrolledInTrainingSessions);
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @PostMapping({ "/{participantId}/training_sessions/{trainingSessionId}", "/{participantId}/training_sessions/{trainingSessionId}/" })
+    public ResponseEntity<Map<String, TrainingSessionResponseDto>> post(@PathVariable Integer participantId, @PathVariable Integer trainingSessionId) {
+        TrainingSessionResponseDto enrolledInTrainingSession = this.participantsService.enrollParticipantInTrainingSession(participantId, trainingSessionId);
+        Map<String, TrainingSessionResponseDto> responseBody = new HashMap<>();
+        responseBody.put("enrolled_in_training_session", enrolledInTrainingSession);
+        return ResponseEntity.ok(responseBody);
     }
 
     @PutMapping({ "/{id}", "/{id}/" })
@@ -79,6 +111,22 @@ public class ParticipantsController {
         ParticipantResponseDto deletedParticipant = this.participantsService.deleteById(id);
         Map<String, ParticipantResponseDto> responseBody = new HashMap<>();
         responseBody.put("deleted_participant", deletedParticipant);
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @DeleteMapping({ "/{participantId}/training_sessions", "/{participantId}/training_sessions/" })
+    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> cancelParticipantFromTrainingSessions(@PathVariable Integer participantId) {
+        List<TrainingSessionResponseDto> canceledFromTrainingSessions = this.participantsService.cancelParticipantFromTrainingSessions(participantId);
+        Map<String, List<TrainingSessionResponseDto>> responseBody = new HashMap<>();
+        responseBody.put("canceled_from_training_sessions", canceledFromTrainingSessions);
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @DeleteMapping({ "/{participantId}/training_sessions/{trainingSessionId}", "/{participantId}/training_sessions/{trainingSessionId}/" })
+    public ResponseEntity<Map<String, TrainingSessionResponseDto>> cancelParticipantFromTrainingSession(@PathVariable Integer participantId, @PathVariable Integer trainingSessionId) {
+        TrainingSessionResponseDto canceledFromTrainingSession = this.participantsService.cancelParticipantFromTrainingSession(participantId, trainingSessionId);
+        Map<String, TrainingSessionResponseDto> responseBody = new HashMap<>();
+        responseBody.put("canceled_from_training_session", canceledFromTrainingSession);
         return ResponseEntity.ok(responseBody);
     }
 }

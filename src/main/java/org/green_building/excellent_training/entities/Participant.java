@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -86,6 +87,11 @@ public class Participant {
     @JsonBackReference
     private Structure structure;
 
+    /********************* training_sessions *********************/
+    @ManyToMany (
+        mappedBy = "participants"
+    )
+    private List<TrainingSession> trainingSessions;
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Participant(String email, String firstName, String lastName, Integer phoneNumber, Profile profile, Structure structure) {

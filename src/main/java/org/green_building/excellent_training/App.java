@@ -1,5 +1,8 @@
 package org.green_building.excellent_training;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.green_building.excellent_training.entities.Domain;
 import org.green_building.excellent_training.entities.Participant;
 import org.green_building.excellent_training.entities.Profile;
@@ -59,7 +62,7 @@ public class App {
             Structure regionalZaghouaneStructure = structuresRepository.save(new Structure("regional zaghouane"));
 
             // Create Participants
-            participantsRepository.save(new Participant(
+            Participant participant_1 = participantsRepository.save(new Participant(
                 "email@email_1.com",
                 "first name 1",
                 "last name 1",
@@ -67,7 +70,7 @@ public class App {
                 engineer_3Profile,
                 centralTunisStructure
             ));
-            participantsRepository.save(new Participant(
+            Participant participant_2 = participantsRepository.save(new Participant(
                 "email@email_2.com",
                 "first name 2",
                 "last name 2",
@@ -75,7 +78,7 @@ public class App {
                 engineer_5Profile,
                 regionalNabeulStructure
             ));
-            participantsRepository.save(new Participant(
+            Participant participant_3 = participantsRepository.save(new Participant(
                 "email@email_3.com",
                 "first name 3",
                 "last name 3",
@@ -111,6 +114,14 @@ public class App {
                 3000.0,
                 domain_3
             ));
+
+            // Add participants to training sessions
+            trainingSession_1.setParticipants(new ArrayList<>(List.of(participant_2, participant_3)));
+            trainingSession_2.setParticipants(new ArrayList<>(List.of(participant_1, participant_3)));
+            trainingSession_3.setParticipants(new ArrayList<>(List.of(participant_1, participant_2)));
+            trainingSessionsRepository.save(trainingSession_1);
+            trainingSessionsRepository.save(trainingSession_2);
+            trainingSessionsRepository.save(trainingSession_3);
         };
     }
 }

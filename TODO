@@ -16,5 +16,6 @@
 - add Participant component
 - add Domain component
 - add TrainingSession component
+- add ManyToMany relationship (TrainingSession x Participant)
 
 CANCELLED:
