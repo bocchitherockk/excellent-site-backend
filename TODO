@@ -1,5 +1,5 @@
 /******************** TODO ********************/
-
+- add ManyToMany relationship (TrainingSession x Trainer)
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller

@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParticipantRequestDto {
 
+    @NotBlank
     @Email
     private String email;
 

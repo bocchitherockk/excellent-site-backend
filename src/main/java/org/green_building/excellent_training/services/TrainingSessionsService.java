@@ -84,7 +84,7 @@ public class TrainingSessionsService {
             List<Integer> missingIds = participantsIds.stream()
                 .filter(id -> !existingIds.contains(id))
                 .collect(Collectors.toList());
-            throw new ResourceNotFoundException("participants", "ids", "{ " + missingIds + " }");
+            throw new ResourceNotFoundException("participants", "ids", missingIds);
         }
 
         Set<Participant> currentParticipants = new HashSet<>(trainingSession.getParticipants());

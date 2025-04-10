@@ -9,6 +9,7 @@ import org.green_building.excellent_training.entities.Participant;
 import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.Structure;
+import org.green_building.excellent_training.entities.Trainer;
 import org.green_building.excellent_training.entities.TrainingSession;
 import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.repositories.DomainsRepository;
@@ -17,6 +18,7 @@ import org.green_building.excellent_training.repositories.ParticipantsRepository
 import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
 import org.green_building.excellent_training.repositories.StructuresRepository;
+import org.green_building.excellent_training.repositories.TrainersRepository;
 import org.green_building.excellent_training.repositories.TrainingSessionsRepository;
 import org.green_building.excellent_training.repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -41,7 +43,8 @@ public class App {
             ParticipantsRepository participantsRepository,
             DomainsRepository domainsRepository,
             TrainingSessionsRepository trainingSessionsRepository,
-            EmployersRepository employersRepository) {
+            EmployersRepository employersRepository,
+            TrainersRepository trainersRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -57,7 +60,7 @@ public class App {
             Profile engineer_3Profile = profilesRepository.save(new Profile(Profile.ENGINEER_3));
             Profile engineer_5Profile = profilesRepository.save(new Profile(Profile.ENGINEER_5));
             Profile technicianProfile = profilesRepository.save(new Profile(Profile.TECHNICIAN));
-            Profile lawyerProfile     = profilesRepository.save(new Profile(Profile.LAWYER));
+            /*Profile lawyerProfile     = */profilesRepository.save(new Profile(Profile.LAWYER));
 
             // Create Structures
             Structure centralTunisStructure      = structuresRepository.save(new Structure("central tunis"));
@@ -130,6 +133,38 @@ public class App {
             Employer employer_1 = employersRepository.save(new Employer("employer 1"));
             Employer employer_2 = employersRepository.save(new Employer("employer 2"));
             Employer employer_3 = employersRepository.save(new Employer("employer 3"));
+
+            // Create trainers
+            Trainer trainer_1 = trainersRepository.save(
+                new Trainer(
+                    "email@email_1.com",
+                    "first name 1",
+                    "last name 1",
+                    12345678,
+                    Trainer.Type.INTERNAL,
+                    employer_1
+                )
+            );
+            Trainer trainer_2 = trainersRepository.save(
+                new Trainer(
+                    "email@email_2.com",
+                    "first name 2",
+                    "last name 2",
+                    12345678,
+                    Trainer.Type.EXTERNAL,
+                    employer_2
+                )
+            );
+            Trainer trainer_3 = trainersRepository.save(
+                new Trainer(
+                    "email@email_3.com",
+                    "first name 3",
+                    "last name 3",
+                    12345678,
+                    Trainer.Type.INTERNAL,
+                    employer_3
+                )
+            );
         };
     }
 }

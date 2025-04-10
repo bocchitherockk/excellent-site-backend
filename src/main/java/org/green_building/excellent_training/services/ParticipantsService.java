@@ -90,7 +90,7 @@ public class ParticipantsService {
             List<Integer> missingIds = trainingSessionsIds.stream()
                 .filter(id -> !existingIds.contains(id))
                 .collect(Collectors.toList());
-            throw new ResourceNotFoundException("training sessions", "ids", "{ " + missingIds + " }");
+            throw new ResourceNotFoundException("training sessions", "ids", missingIds);
         }
 
         List<TrainingSession> enrolledSessions = new ArrayList<>();

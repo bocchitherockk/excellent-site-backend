@@ -48,7 +48,6 @@ public class Employer {
     )
     private String name;
 
-    /*
     @OneToMany (
         mappedBy = "employer",
         cascade = CascadeType.ALL,
@@ -57,7 +56,6 @@ public class Employer {
 
     @JsonManagedReference
     private List<Trainer> trainers;
-    */
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Employer(String name) {
