@@ -53,6 +53,7 @@ public class SecurityConfig {
                                    .requestMatchers("/participants/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/domains/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/training_sessions/**").hasRole(Role.ADMIN)
+                                   .requestMatchers("/employers/**").hasRole(Role.ADMIN)
                                    // Add more role-based authorization rules as needed
                                    .anyRequest().authenticated()
                                    )

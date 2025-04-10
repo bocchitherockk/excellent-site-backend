@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.green_building.excellent_training.entities.Domain;
+import org.green_building.excellent_training.entities.Employer;
 import org.green_building.excellent_training.entities.Participant;
 import org.green_building.excellent_training.entities.Profile;
 import org.green_building.excellent_training.entities.Role;
@@ -11,6 +12,7 @@ import org.green_building.excellent_training.entities.Structure;
 import org.green_building.excellent_training.entities.TrainingSession;
 import org.green_building.excellent_training.entities.User;
 import org.green_building.excellent_training.repositories.DomainsRepository;
+import org.green_building.excellent_training.repositories.EmployersRepository;
 import org.green_building.excellent_training.repositories.ParticipantsRepository;
 import org.green_building.excellent_training.repositories.ProfilesRepository;
 import org.green_building.excellent_training.repositories.RolesRepository;
@@ -38,7 +40,8 @@ public class App {
             StructuresRepository structuresRepository,
             ParticipantsRepository participantsRepository,
             DomainsRepository domainsRepository,
-            TrainingSessionsRepository trainingSessionsRepository) {
+            TrainingSessionsRepository trainingSessionsRepository,
+            EmployersRepository employersRepository) {
         return args -> {
             // Create roles
             Role userRole        = rolesRepository.save(new Role(Role.USER));
@@ -122,6 +125,11 @@ public class App {
             trainingSessionsRepository.save(trainingSession_1);
             trainingSessionsRepository.save(trainingSession_2);
             trainingSessionsRepository.save(trainingSession_3);
+
+            // Create Employers
+            Employer employer_1 = employersRepository.save(new Employer("employer 1"));
+            Employer employer_2 = employersRepository.save(new Employer("employer 2"));
+            Employer employer_3 = employersRepository.save(new Employer("employer 3"));
         };
     }
 }
