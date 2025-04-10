@@ -89,12 +89,10 @@ public class Trainer {
     private Employer employer;
 
     /********************* training_sessions *********************/
-    /*
     @ManyToMany (
         mappedBy = "trainers"
     )
     private List<TrainingSession> trainingSessions;
-    */
 
     // a constructor that does not have the field 'id' because it is auto generated
     public Trainer(String email, String firstName, String lastName, Integer phoneNumber, Trainer.Type type, Employer employer) {

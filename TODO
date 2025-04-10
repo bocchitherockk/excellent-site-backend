@@ -1,5 +1,5 @@
 /******************** TODO ********************/
-- add ManyToMany relationship (TrainingSession x Trainer)
+- change access to endpoints by roles exactly as defined in the specifications
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -19,5 +19,6 @@
 - add ManyToMany relationship (TrainingSession x Participant)
 - add Employer component
 - add Trainer component
+- add ManyToMany relationship (TrainingSession x Trainer)
 
-CANCELLED:
+/******************** CANCELLED ********************/

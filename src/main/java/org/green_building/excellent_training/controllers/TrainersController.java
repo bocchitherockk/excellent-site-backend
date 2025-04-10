@@ -50,23 +50,21 @@ public class TrainersController {
         return ResponseEntity.ok(responseBody);
     }
 
-    /*
-    @GetMapping({ "/{participantId}/training_sessions", "/{participantId}/training_sessions/" })
-    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> getTrainingSessions(@PathVariable Integer participantId) {
-        List<TrainingSessionResponseDto> trainingSessions = this.participantsService.getParticipantTrainingSessionsById(participantId);
+    @GetMapping({ "/{trainerId}/training_sessions", "/{trainerId}/training_sessions/" })
+    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> getTrainingSessions(@PathVariable Integer trainerId) {
+        List<TrainingSessionResponseDto> trainingSessions = this.trainersService.getTrainerTrainingSessionsById(trainerId);
         Map<String, List<TrainingSessionResponseDto>> responseBody = new HashMap<>();
         responseBody.put("training_sessions", trainingSessions);
         return ResponseEntity.ok(responseBody);
     }
 
-    @GetMapping({ "/{participantId}/training_sessions/{trainingSessionId}", "/{participantId}/training_sessions/{trainingSessionId}/" })
-    public ResponseEntity<Map<String, TrainingSessionResponseDto>> getTrainingSessions(@PathVariable Integer participantId, @PathVariable Integer trainingSessionId) {
-        TrainingSessionResponseDto trainingSession = this.participantsService.getParticipantTrainingSessionById(participantId, trainingSessionId);
+    @GetMapping({ "/{trainerId}/training_sessions/{trainingSessionId}", "/{trainerId}/training_sessions/{trainingSessionId}/" })
+    public ResponseEntity<Map<String, TrainingSessionResponseDto>> getTrainingSessions(@PathVariable Integer trainerId, @PathVariable Integer trainingSessionId) {
+        TrainingSessionResponseDto trainingSession = this.trainersService.getTrainerTrainingSessionById(trainerId, trainingSessionId);
         Map<String, TrainingSessionResponseDto> responseBody = new HashMap<>();
         responseBody.put("training_session", trainingSession);
         return ResponseEntity.ok(responseBody);
     }
-    */
 
     @PostMapping({ "", "/" })
     public ResponseEntity<Map<String, TrainerResponseDto>> post(@Valid @RequestBody TrainerRequestDto request) {
@@ -76,23 +74,21 @@ public class TrainersController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
-    /*
-    @PostMapping({ "/{participantId}/training_sessions", "/{participantId}/training_sessions/" })
-    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> post(@PathVariable Integer participantId, @RequestBody Map<String, List<Integer>> requestBody) {
-        List<TrainingSessionResponseDto> enrolledInTrainingSessions = this.participantsService.enrollParticipantInTrainingSessions(participantId, requestBody.get("training_sessions_ids"));
+    @PostMapping({ "/{trainerId}/training_sessions", "/{trainerId}/training_sessions/" })
+    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> post(@PathVariable Integer trainerId, @RequestBody Map<String, List<Integer>> requestBody) {
+        List<TrainingSessionResponseDto> assignedInTrainingSessions = this.trainersService.assignTrainerToTrainingSessions(trainerId, requestBody.get("training_sessions_ids"));
         Map<String, List<TrainingSessionResponseDto>> responseBody = new HashMap<>();
-        responseBody.put("enrolled_in_training_sessions", enrolledInTrainingSessions);
+        responseBody.put("assigned_in_training_sessions", assignedInTrainingSessions);
         return ResponseEntity.ok(responseBody);
     }
 
-    @PostMapping({ "/{participantId}/training_sessions/{trainingSessionId}", "/{participantId}/training_sessions/{trainingSessionId}/" })
-    public ResponseEntity<Map<String, TrainingSessionResponseDto>> post(@PathVariable Integer participantId, @PathVariable Integer trainingSessionId) {
-        TrainingSessionResponseDto enrolledInTrainingSession = this.participantsService.enrollParticipantInTrainingSession(participantId, trainingSessionId);
+    @PostMapping({ "/{trainerId}/training_sessions/{trainingSessionId}", "/{trainerId}/training_sessions/{trainingSessionId}/" })
+    public ResponseEntity<Map<String, TrainingSessionResponseDto>> post(@PathVariable Integer trainerId, @PathVariable Integer trainingSessionId) {
+        TrainingSessionResponseDto assignedInTrainingSession = this.trainersService.assignTrainerToTrainingSession(trainerId, trainingSessionId);
         Map<String, TrainingSessionResponseDto> responseBody = new HashMap<>();
-        responseBody.put("enrolled_in_training_session", enrolledInTrainingSession);
+        responseBody.put("assigned_in_training_session", assignedInTrainingSession);
         return ResponseEntity.ok(responseBody);
     }
-    */
 
     @PutMapping({ "/{id}", "/{id}/" })
     public ResponseEntity<Map<String, TrainerResponseDto>> put(@PathVariable Integer id, @RequestBody TrainerRequestDto updates) {
@@ -118,21 +114,19 @@ public class TrainersController {
         return ResponseEntity.ok(responseBody);
     }
 
-    /*
-    @DeleteMapping({ "/{participantId}/training_sessions", "/{participantId}/training_sessions/" })
-    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> cancelParticipantFromTrainingSessions(@PathVariable Integer participantId) {
-        List<TrainingSessionResponseDto> canceledFromTrainingSessions = this.participantsService.cancelParticipantFromTrainingSessions(participantId);
+    @DeleteMapping({ "/{trainerId}/training_sessions", "/{trainerId}/training_sessions/" })
+    public ResponseEntity<Map<String, List<TrainingSessionResponseDto>>> cancelTrainerFromTrainingSessions(@PathVariable Integer trainerId) {
+        List<TrainingSessionResponseDto> canceledFromTrainingSessions = this.trainersService.cancelTrainerFromTrainingSessions(trainerId);
         Map<String, List<TrainingSessionResponseDto>> responseBody = new HashMap<>();
         responseBody.put("canceled_from_training_sessions", canceledFromTrainingSessions);
         return ResponseEntity.ok(responseBody);
     }
 
-    @DeleteMapping({ "/{participantId}/training_sessions/{trainingSessionId}", "/{participantId}/training_sessions/{trainingSessionId}/" })
-    public ResponseEntity<Map<String, TrainingSessionResponseDto>> cancelParticipantFromTrainingSession(@PathVariable Integer participantId, @PathVariable Integer trainingSessionId) {
-        TrainingSessionResponseDto canceledFromTrainingSession = this.participantsService.cancelParticipantFromTrainingSession(participantId, trainingSessionId);
+    @DeleteMapping({ "/{trainerId}/training_sessions/{trainingSessionId}", "/{trainerId}/training_sessions/{trainingSessionId}/" })
+    public ResponseEntity<Map<String, TrainingSessionResponseDto>> cancelTrainerFromTrainingSession(@PathVariable Integer trainerId, @PathVariable Integer trainingSessionId) {
+        TrainingSessionResponseDto canceledFromTrainingSession = this.trainersService.cancelTrainerFromTrainingSession(trainerId, trainingSessionId);
         Map<String, TrainingSessionResponseDto> responseBody = new HashMap<>();
         responseBody.put("canceled_from_training_session", canceledFromTrainingSession);
         return ResponseEntity.ok(responseBody);
     }
-    */
 }

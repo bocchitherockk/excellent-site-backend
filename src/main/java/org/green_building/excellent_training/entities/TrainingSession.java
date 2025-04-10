@@ -77,11 +77,20 @@ public class TrainingSession {
     /********************* participants *********************/
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable (
-        name = "participation",
+        name = "participations",
         joinColumns = @JoinColumn (name = "training_session_id"),
         inverseJoinColumns = @JoinColumn (name = "participant_id")
     )
     private List<Participant> participants;
+
+    /********************* trainers *********************/
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable (
+        name = "trains",
+        joinColumns = @JoinColumn (name = "training_session_id"),
+        inverseJoinColumns = @JoinColumn (name = "trainer_id")
+    )
+    private List<Trainer> trainers;
 
     // a constructor that does not have the field 'id' because it is auto generated
     public TrainingSession(String title, Integer year, Integer durationDays, Double budget, Domain domain) {

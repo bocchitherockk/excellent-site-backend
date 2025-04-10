@@ -10,12 +10,12 @@ import org.green_building.excellent_training.dtos.TrainerResponseDto;
 import org.green_building.excellent_training.dtos.TrainingSessionResponseDto;
 import org.green_building.excellent_training.entities.Employer;
 import org.green_building.excellent_training.entities.Trainer;
-// import org.green_building.excellent_training.entities.TrainingSession;
+import org.green_building.excellent_training.entities.TrainingSession;
 import org.green_building.excellent_training.exceptions.NonUniqueValueException;
 import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.repositories.EmployersRepository;
 import org.green_building.excellent_training.repositories.TrainersRepository;
-// import org.green_building.excellent_training.repositories.TrainingSessionsRepository;
+import org.green_building.excellent_training.repositories.TrainingSessionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +23,13 @@ import org.springframework.stereotype.Service;
 public class TrainersService {
     private final TrainersRepository trainersRepository;
     private final EmployersRepository employersRepository;
-    // private final TrainingSessionsRepository trainingSessionsRepository;
+    private final TrainingSessionsRepository trainingSessionsRepository;
 
     @Autowired
-    public TrainersService(TrainersRepository trainersRepository, EmployersRepository employersRepository/* , TrainingSessionsRepository trainingSessionsRepository */) {
+    public TrainersService(TrainersRepository trainersRepository, EmployersRepository employersRepository , TrainingSessionsRepository trainingSessionsRepository) {
         this.trainersRepository = trainersRepository;
         this.employersRepository = employersRepository;
-        // this.trainingSessionsRepository = trainingSessionsRepository;
+        this.trainingSessionsRepository = trainingSessionsRepository;
     }
 
     public List<TrainerResponseDto> getAll() {
@@ -43,7 +43,6 @@ public class TrainersService {
         return TrainerResponseDto.from(trainer);
     }
 
-    /*
     public List<TrainingSessionResponseDto> getTrainerTrainingSessionsById(Integer trainerId) {
         Trainer trainer = this.trainersRepository.findById(trainerId)
             .orElseThrow(() -> new ResourceNotFoundException("trainer", "id", trainerId));
@@ -60,7 +59,6 @@ public class TrainersService {
         throw new ResourceNotFoundException("training session", "id", trainingSessionId);
     }
 
-    */
     public TrainerResponseDto create(TrainerRequestDto request) {
         if (this.trainersRepository.existsByEmail(request.getEmail()))
             throw new NonUniqueValueException("trainer", "email", request.getEmail());
@@ -73,8 +71,7 @@ public class TrainersService {
         return TrainerResponseDto.from(createdTrainer);
     }
 
-    /*
-    public List<TrainingSessionResponseDto> enrollTrainerInTrainingSessions(Integer trainerId, List<Integer> trainingSessionsIds) {
+    public List<TrainingSessionResponseDto> assignTrainerToTrainingSessions(Integer trainerId, List<Integer> trainingSessionsIds) {
         Trainer trainer = this.trainersRepository.findById(trainerId)
         .orElseThrow(() -> new ResourceNotFoundException("trainer", "id", trainerId));
 
@@ -88,21 +85,21 @@ public class TrainersService {
             throw new ResourceNotFoundException("training sessions", "ids", missingIds);
         }
 
-        List<TrainingSession> enrolledSessions = new ArrayList<>();
+        List<TrainingSession> assignedSessions = new ArrayList<>();
         for (TrainingSession session : trainingSessions) {
             if (!session.getTrainers().contains(trainer)) {
                 session.getTrainers().add(trainer);
                 trainingSessionsRepository.save(session);
-                enrolledSessions.add(session);
+                assignedSessions.add(session);
             } else {
-                enrolledSessions.add(session); // Already enrolled
+                assignedSessions.add(session); // Already assigned
             }
         }
 
-        return TrainingSessionResponseDto.from(enrolledSessions);
+        return TrainingSessionResponseDto.from(assignedSessions);
     }
 
-    public TrainingSessionResponseDto enrollTrainerInTrainingSession(Integer trainerId, Integer trainingSessionId) {
+    public TrainingSessionResponseDto assignTrainerToTrainingSession(Integer trainerId, Integer trainingSessionId) {
         Trainer trainer = this.trainersRepository.findById(trainerId)
             .orElseThrow(() -> new ResourceNotFoundException("trainer", "id", trainerId));
         TrainingSession trainingSession = trainingSessionsRepository.findById(trainingSessionId)
@@ -115,7 +112,6 @@ public class TrainersService {
 
         return TrainingSessionResponseDto.from(trainingSession);
     }
-    */
 
     public TrainerResponseDto updateById(Integer id, TrainerRequestDto updates) {
         Trainer trainer = this.trainersRepository.findById(id)
@@ -153,7 +149,6 @@ public class TrainersService {
         return TrainerResponseDto.from(trainer);
     }
 
-    /*
     public List<TrainingSessionResponseDto> cancelTrainerFromTrainingSessions(Integer trainerId) {
         Trainer trainer = this.trainersRepository.findById(trainerId)
             .orElseThrow(() -> new ResourceNotFoundException("trainer", "id", trainerId));
@@ -168,9 +163,7 @@ public class TrainersService {
 
         return TrainingSessionResponseDto.from(canceledSessions);
     }
-    */
 
-    /*
     public TrainingSessionResponseDto cancelTrainerFromTrainingSession(Integer trainerId, Integer trainingSessionId) {
         Trainer trainer = this.trainersRepository.findById(trainerId)
             .orElseThrow(() -> new ResourceNotFoundException("trainer", "id", trainerId));
@@ -184,5 +177,4 @@ public class TrainersService {
 
         throw new ResourceNotFoundException("training session", "id", trainingSessionId);
     }
-    */
 }

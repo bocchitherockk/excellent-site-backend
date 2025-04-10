@@ -34,7 +34,7 @@ public class App {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(
+    CommandLineRunner insertDBData(
             RolesRepository rolesRepository, 
             UsersRepository usersRepository,
             PasswordEncoder passwordEncoder,
@@ -121,7 +121,7 @@ public class App {
                 domain_3
             ));
 
-            // Add participants to training sessions
+            // enroll participants in training sessions
             trainingSession_1.setParticipants(new ArrayList<>(List.of(participant_2, participant_3)));
             trainingSession_2.setParticipants(new ArrayList<>(List.of(participant_1, participant_3)));
             trainingSession_3.setParticipants(new ArrayList<>(List.of(participant_1, participant_2)));
@@ -165,6 +165,14 @@ public class App {
                     employer_3
                 )
             );
+
+            // Add trainers to training sessions
+            trainingSession_1.setTrainers(new ArrayList<>(List.of(trainer_2, trainer_3)));
+            trainingSession_2.setTrainers(new ArrayList<>(List.of(trainer_1, trainer_3)));
+            trainingSession_3.setTrainers(new ArrayList<>(List.of(trainer_1, trainer_2)));
+            trainingSessionsRepository.save(trainingSession_1);
+            trainingSessionsRepository.save(trainingSession_2);
+            trainingSessionsRepository.save(trainingSession_3);
         };
     }
 }

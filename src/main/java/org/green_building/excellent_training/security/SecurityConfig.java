@@ -55,8 +55,7 @@ public class SecurityConfig {
                                    .requestMatchers("/training_sessions/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/employers/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/trainers/**").hasRole(Role.ADMIN)
-                                   // Add more role-based authorization rules as needed
-                                   .anyRequest().authenticated()
+                                   .anyRequest().denyAll()
                                    )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
