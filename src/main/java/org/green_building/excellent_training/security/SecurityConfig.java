@@ -41,20 +41,22 @@ public class SecurityConfig {
             )
             .authorizeHttpRequests(auth -> auth
                                    .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                                   .requestMatchers("/auth/login").denyAll()
                                    /*
                                    .requestMatchers(HttpMethod.POST, "/auth/register").hasRole(Role.ADMIN)
                                    .requestMatchers("/auth/register").denyAll()
                                    */
+                                  .requestMatchers("/participants/**").hasAnyRole(Role.USER, Role.ADMIN)
+                                  .requestMatchers("/training_sessions/**").hasAnyRole(Role.USER, Role.ADMIN)
+                                  .requestMatchers("/trainers/**").hasAnyRole(Role.USER, Role.ADMIN)
+
                                    .requestMatchers("/users/**").hasRole(Role.ADMIN)
-                                   .requestMatchers("/roles/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/profiles/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/structures/**").hasRole(Role.ADMIN)
-                                   .requestMatchers("/participants/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/domains/**").hasRole(Role.ADMIN)
-                                   .requestMatchers("/training_sessions/**").hasRole(Role.ADMIN)
+                                   /*
+                                   .requestMatchers("/roles/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/employers/**").hasRole(Role.ADMIN)
-                                   .requestMatchers("/trainers/**").hasRole(Role.ADMIN)
+                                   */
                                    .anyRequest().denyAll()
                                    )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

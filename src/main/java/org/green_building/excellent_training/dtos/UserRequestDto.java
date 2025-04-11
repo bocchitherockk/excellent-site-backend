@@ -20,6 +20,9 @@ public class UserRequestDto {
     @NotBlank
     private String password;
 
+    @JsonProperty("old_password")
+    private String oldPassword;
+
     // if not specified, pick role "USER" by default
     @JsonProperty("role_id") // receive role_id in the json request body
     private Integer roleId;

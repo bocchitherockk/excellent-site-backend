@@ -6,6 +6,7 @@ import org.green_building.excellent_training.dtos.UserRequestDto;
 import org.green_building.excellent_training.dtos.UserResponseDto;
 import org.green_building.excellent_training.entities.Role;
 import org.green_building.excellent_training.entities.User;
+import org.green_building.excellent_training.exceptions.IncorrectPasswordException;
 import org.green_building.excellent_training.exceptions.NonUniqueValueException;
 import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.repositories.RolesRepository;
@@ -60,6 +61,15 @@ public class UsersService {
     public UserResponseDto updateById(Integer id, UserRequestDto updates) {
         User user = this.usersRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
+
+        if (updates.getPassword() != null) {
+            if (updates.getOldPassword() == null ||
+                !passwordEncoder.matches(updates.getOldPassword(), user.getPassword())) {
+                throw new IncorrectPasswordException("Old password is incorrect");
+            }
+            user.setPassword(passwordEncoder.encode(updates.getPassword()));
+        }
+
         if (updates.getUsername() != null && !updates.getUsername().equals(user.getUsername())) {
             boolean usernameExists = this.usersRepository.existsByUsername(updates.getUsername());
             if (usernameExists) {
@@ -67,7 +77,7 @@ public class UsersService {
             }
             user.setUsername(updates.getUsername());
         }
-        if (updates.getPassword() != null) user.setPassword(updates.getPassword());
+
         if (updates.getRoleId() != null) {
             Role role = this.rolesRepository.findById(updates.getRoleId())
                 .orElseThrow(() -> new ResourceNotFoundException("role", "id", updates.getRoleId()));
