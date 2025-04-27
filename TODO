@@ -1,4 +1,5 @@
 /******************** TODO ********************/
+- add responsible functionality(see statistics)
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -21,5 +22,6 @@
 - add ManyToMany relationship (TrainingSession x Trainer)
 - change PUT '/users/{id}' to accept old_password field to verify it
 - change access to endpoints to match the specifications
+- enable CORS
 
 /******************** CANCELLED ********************/
