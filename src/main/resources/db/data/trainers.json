@@ -1,20 +1,802 @@
 [
-    {
-      "id": 1,
-      "first_name": "Sophia",
-      "last_name": "Williams",
-      "email": "sophia.williams@example.com",
-      "phone_number": "345-678-9012",
-      "type": "internal",
-      "employee_id": 1
-    },
-    {
-      "id": 2,
-      "first_name": "Daniel",
-      "last_name": "Miller",
-      "email": "daniel.miller@example.com",
-      "phone_number": "456-789-0123",
-      "type": "external",
-      "employee_id": 2
-    }
+  {
+    "first_name": "Frida",
+    "last_name": "Leannon",
+    "email": "Kameron77@gmail.com",
+    "phone_number": 17099698,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kennedi",
+    "last_name": "Corwin",
+    "email": "Heidi10@yahoo.com",
+    "phone_number": 13777218,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Flossie",
+    "last_name": "Gutkowski",
+    "email": "Shyann_Weissnat54@hotmail.com",
+    "phone_number": 89237552,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Axel",
+    "last_name": "Boehm",
+    "email": "Darrel.Von14@yahoo.com",
+    "phone_number": 94060532,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Mack",
+    "last_name": "Mosciski",
+    "email": "Harold8@gmail.com",
+    "phone_number": 87690942,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Korey",
+    "last_name": "Borer",
+    "email": "Delfina_Swift@yahoo.com",
+    "phone_number": 9426320,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Wilbert",
+    "last_name": "Skiles",
+    "email": "Percy2@hotmail.com",
+    "phone_number": 13964535,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Dawn",
+    "last_name": "Abbott",
+    "email": "Adrien_Kreiger@hotmail.com",
+    "phone_number": 73136632,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Filomena",
+    "last_name": "Miller",
+    "email": "Alberto.Kertzmann@yahoo.com",
+    "phone_number": 6718960,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Reba",
+    "last_name": "Grimes",
+    "email": "Faye38@gmail.com",
+    "phone_number": 88528420,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Percival",
+    "last_name": "Lehner",
+    "email": "Stewart_Wolf69@hotmail.com",
+    "phone_number": 84675959,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Alvina",
+    "last_name": "Ullrich",
+    "email": "Malcolm.Morissette@gmail.com",
+    "phone_number": 23445093,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Dulce",
+    "last_name": "Labadie",
+    "email": "Leopold75@gmail.com",
+    "phone_number": 7479248,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Hyman",
+    "last_name": "Skiles",
+    "email": "Marcia.Blick69@hotmail.com",
+    "phone_number": 17008704,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Edgardo",
+    "last_name": "Parker",
+    "email": "Emely98@gmail.com",
+    "phone_number": 66899384,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Yasmin",
+    "last_name": "Miller",
+    "email": "Lempi_Wiegand7@yahoo.com",
+    "phone_number": 79251290,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Laurel",
+    "last_name": "Lowe",
+    "email": "Soledad45@gmail.com",
+    "phone_number": 59850421,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Keaton",
+    "last_name": "Weber",
+    "email": "Rafael65@gmail.com",
+    "phone_number": 9297823,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Baylee",
+    "last_name": "Herman",
+    "email": "Leland.Boehm29@gmail.com",
+    "phone_number": 14206427,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kali",
+    "last_name": "Lueilwitz",
+    "email": "Rudy_Moore81@hotmail.com",
+    "phone_number": 42867656,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Katrine",
+    "last_name": "Mertz",
+    "email": "Omari_Kutch22@gmail.com",
+    "phone_number": 54864068,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Olga",
+    "last_name": "Wilkinson",
+    "email": "Westley31@yahoo.com",
+    "phone_number": 17978294,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Glennie",
+    "last_name": "Kovacek",
+    "email": "Katherine.Reynolds78@gmail.com",
+    "phone_number": 54940688,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Noelia",
+    "last_name": "Prosacco",
+    "email": "Coty31@yahoo.com",
+    "phone_number": 87063863,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kamren",
+    "last_name": "McClure",
+    "email": "Noemi74@gmail.com",
+    "phone_number": 88418327,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Sylvan",
+    "last_name": "Crona",
+    "email": "Darian28@yahoo.com",
+    "phone_number": 8845047,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Aida",
+    "last_name": "Ernser",
+    "email": "Nels_Larkin2@yahoo.com",
+    "phone_number": 68951395,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Carter",
+    "last_name": "West",
+    "email": "Jennie.Krajcik90@hotmail.com",
+    "phone_number": 36356996,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kevon",
+    "last_name": "Gorczany",
+    "email": "Alden81@gmail.com",
+    "phone_number": 92239102,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Aron",
+    "last_name": "Heaney",
+    "email": "Hadley_Leuschke29@yahoo.com",
+    "phone_number": 44556387,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Jeromy",
+    "last_name": "Smitham",
+    "email": "Marian_Miller38@yahoo.com",
+    "phone_number": 8203793,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kaylee",
+    "last_name": "Wilderman",
+    "email": "Alfreda47@hotmail.com",
+    "phone_number": 45403622,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Linnea",
+    "last_name": "Wisozk",
+    "email": "Jett.Hagenes@gmail.com",
+    "phone_number": 84742014,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Domingo",
+    "last_name": "Bins",
+    "email": "Darlene31@yahoo.com",
+    "phone_number": 79957681,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Chase",
+    "last_name": "Hammes",
+    "email": "Waldo93@yahoo.com",
+    "phone_number": 8966895,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Mariah",
+    "last_name": "Hirthe",
+    "email": "Curtis.Waters@gmail.com",
+    "phone_number": 14146292,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kathlyn",
+    "last_name": "Konopelski",
+    "email": "Reynold15@gmail.com",
+    "phone_number": 68046495,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Jayda",
+    "last_name": "Greenfelder",
+    "email": "Seamus66@yahoo.com",
+    "phone_number": 84213855,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Loma",
+    "last_name": "Moen",
+    "email": "Therese_Beer65@yahoo.com",
+    "phone_number": 33860128,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Deondre",
+    "last_name": "Lynch",
+    "email": "Santina_Gerhold@yahoo.com",
+    "phone_number": 34812731,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Shawn",
+    "last_name": "McGlynn",
+    "email": "Kaitlin_Paucek@yahoo.com",
+    "phone_number": 12147844,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Hermina",
+    "last_name": "Herman",
+    "email": "Schuyler_Hermann@gmail.com",
+    "phone_number": 4986894,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Maud",
+    "last_name": "Zemlak",
+    "email": "Joaquin.Kuphal94@gmail.com",
+    "phone_number": 62233996,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Bella",
+    "last_name": "Carter",
+    "email": "Chanel.Hammes85@gmail.com",
+    "phone_number": 67979497,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Ray",
+    "last_name": "Jacobson",
+    "email": "Suzanne6@hotmail.com",
+    "phone_number": 83688278,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Noemi",
+    "last_name": "Mueller",
+    "email": "Mohammed4@yahoo.com",
+    "phone_number": 83682326,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Dominic",
+    "last_name": "Stoltenberg",
+    "email": "Carol2@yahoo.com",
+    "phone_number": 7493741,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Willa",
+    "last_name": "Nikolaus",
+    "email": "Ryley.Gleason38@hotmail.com",
+    "phone_number": 97209688,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Melvina",
+    "last_name": "Hand",
+    "email": "Antonette_King@yahoo.com",
+    "phone_number": 64856957,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Mollie",
+    "last_name": "Lang",
+    "email": "Johnnie.Ritchie39@yahoo.com",
+    "phone_number": 54530626,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Audra",
+    "last_name": "Dickinson",
+    "email": "Emely.McClure89@gmail.com",
+    "phone_number": 63990260,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Blanca",
+    "last_name": "Bernhard",
+    "email": "Miller_Lubowitz34@hotmail.com",
+    "phone_number": 14171538,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Harmony",
+    "last_name": "Flatley",
+    "email": "Tyler48@yahoo.com",
+    "phone_number": 62604364,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Cedrick",
+    "last_name": "Parisian",
+    "email": "Laurie34@yahoo.com",
+    "phone_number": 4847604,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Albin",
+    "last_name": "Sporer",
+    "email": "Mohammed39@hotmail.com",
+    "phone_number": 74486077,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Damon",
+    "last_name": "Bruen",
+    "email": "Hayley59@yahoo.com",
+    "phone_number": 77880592,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Karlie",
+    "last_name": "Dickinson",
+    "email": "Keira41@yahoo.com",
+    "phone_number": 57741428,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Jettie",
+    "last_name": "Beatty",
+    "email": "Jamal.Hickle50@hotmail.com",
+    "phone_number": 97031244,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Carole",
+    "last_name": "Stanton",
+    "email": "Sonny.Beer@hotmail.com",
+    "phone_number": 73284396,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Nicola",
+    "last_name": "Heaney",
+    "email": "Loyce_Graham25@gmail.com",
+    "phone_number": 5367371,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Eulah",
+    "last_name": "Lindgren",
+    "email": "Keagan38@hotmail.com",
+    "phone_number": 94713543,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Eliane",
+    "last_name": "McGlynn",
+    "email": "Urban_Konopelski@yahoo.com",
+    "phone_number": 64611954,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Archibald",
+    "last_name": "Cremin",
+    "email": "Jamir.Smitham@yahoo.com",
+    "phone_number": 28550560,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Yasmine",
+    "last_name": "Crona",
+    "email": "Wyman.Brekke93@yahoo.com",
+    "phone_number": 42083500,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Frankie",
+    "last_name": "Padberg",
+    "email": "Helmer41@gmail.com",
+    "phone_number": 78235675,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Pedro",
+    "last_name": "Deckow",
+    "email": "Dion.Dibbert22@yahoo.com",
+    "phone_number": 47893889,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Claudine",
+    "last_name": "Jast",
+    "email": "Pat_Runte-Kiehn99@hotmail.com",
+    "phone_number": 14520267,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Dina",
+    "last_name": "Deckow",
+    "email": "Ludie.Feest68@gmail.com",
+    "phone_number": 15117898,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Laurianne",
+    "last_name": "Ward",
+    "email": "Emelie51@yahoo.com",
+    "phone_number": 12134608,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Lisandro",
+    "last_name": "Bahringer",
+    "email": "Gregory_Homenick@yahoo.com",
+    "phone_number": 44801659,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Lauryn",
+    "last_name": "Rutherford",
+    "email": "Lucius.Nolan10@hotmail.com",
+    "phone_number": 83568450,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Rusty",
+    "last_name": "Rogahn",
+    "email": "Nia_Nicolas21@gmail.com",
+    "phone_number": 69979794,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Lorine",
+    "last_name": "Schmitt",
+    "email": "Tracey_Dietrich@gmail.com",
+    "phone_number": 39376758,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Theresa",
+    "last_name": "Tromp",
+    "email": "Herta_Morar15@hotmail.com",
+    "phone_number": 79003535,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Antonia",
+    "last_name": "Gorczany",
+    "email": "Queen23@yahoo.com",
+    "phone_number": 38602504,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Laurine",
+    "last_name": "Ernser",
+    "email": "Kane39@gmail.com",
+    "phone_number": 29359829,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Vida",
+    "last_name": "Bogan",
+    "email": "Amya77@gmail.com",
+    "phone_number": 99806141,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Macy",
+    "last_name": "Lueilwitz",
+    "email": "Melisa_Kohler78@gmail.com",
+    "phone_number": 99708550,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Enrique",
+    "last_name": "Pouros",
+    "email": "Callie_Grant@yahoo.com",
+    "phone_number": 29991982,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Ressie",
+    "last_name": "Metz",
+    "email": "Asha_Pouros7@yahoo.com",
+    "phone_number": 88709241,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kristina",
+    "last_name": "Bins",
+    "email": "Vernie9@gmail.com",
+    "phone_number": 76878301,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Jennyfer",
+    "last_name": "Sawayn",
+    "email": "Moriah20@yahoo.com",
+    "phone_number": 44003135,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Steuber",
+    "email": "Mckenzie_Roob92@gmail.com",
+    "phone_number": 6368333,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Jamel",
+    "last_name": "Ward",
+    "email": "Haylee.Bernier@hotmail.com",
+    "phone_number": 99334831,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Horacio",
+    "last_name": "Connelly",
+    "email": "Antwon98@hotmail.com",
+    "phone_number": 74838054,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Lora",
+    "last_name": "Kessler",
+    "email": "Levi_Collier@hotmail.com",
+    "phone_number": 5619984,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Arthur",
+    "last_name": "Kuphal",
+    "email": "Troy_Rogahn@yahoo.com",
+    "phone_number": 68498750,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kelli",
+    "last_name": "O'Kon",
+    "email": "Keaton_Windler24@yahoo.com",
+    "phone_number": 19021709,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Laurine",
+    "last_name": "Wyman",
+    "email": "Aurelia.Roberts69@hotmail.com",
+    "phone_number": 45822949,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Syble",
+    "last_name": "Murphy",
+    "email": "Yvette54@yahoo.com",
+    "phone_number": 72723512,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Eda",
+    "last_name": "Konopelski",
+    "email": "Johnathon_Rau@hotmail.com",
+    "phone_number": 46301499,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Mariane",
+    "last_name": "McKenzie-Mosciski",
+    "email": "Zoe64@hotmail.com",
+    "phone_number": 53931816,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Lorena",
+    "last_name": "Kohler",
+    "email": "Shawna12@gmail.com",
+    "phone_number": 36152589,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Chanel",
+    "last_name": "Boyer",
+    "email": "Maia.Bergnaum28@hotmail.com",
+    "phone_number": 76565672,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Hans",
+    "last_name": "Towne",
+    "email": "Joseph.Hansen@hotmail.com",
+    "phone_number": 46073278,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Dante",
+    "last_name": "Donnelly",
+    "email": "Eleanora_Koss80@yahoo.com",
+    "phone_number": 74050274,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Kathryn",
+    "last_name": "Medhurst",
+    "email": "Fleta.Grady@gmail.com",
+    "phone_number": 22265516,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Janick",
+    "last_name": "Beer",
+    "email": "Veda_Greenholt@hotmail.com",
+    "phone_number": 52628868,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Forrest",
+    "last_name": "Stanton",
+    "email": "Tomasa.Dicki63@yahoo.com",
+    "phone_number": 26313265,
+    "type": "INTERNAL",
+    "employer_id": 1
+  },
+  {
+    "first_name": "Fredy",
+    "last_name": "Senger",
+    "email": "Jarrett85@hotmail.com",
+    "phone_number": 5548680,
+    "type": "EXTERNAL",
+    "employer_id": 1
+  }
 ]

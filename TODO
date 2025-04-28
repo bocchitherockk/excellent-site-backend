@@ -1,5 +1,6 @@
 /******************** TODO ********************/
-- add fake test data
+- employers names should not be unique
+- make association tables primary key (composed)
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -24,5 +25,6 @@
 - change access to endpoints to match the specifications
 - enable CORS
 - add dashboard statistics functionality
+- add fake test data
 
 /******************** CANCELLED ********************/

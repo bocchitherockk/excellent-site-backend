@@ -1,5 +1,14 @@
 [
-    { "id": 1, "name": "Developer" },
-    { "id": 2, "name": "Designer" },
-    { "id": 3, "name": "Project Manager" }
+  {
+    "name": "ENGINEER+3"
+  },
+  {
+    "name": "ENGINEER+5"
+  },
+  {
+    "name": "TECHNICIAN"
+  },
+  {
+    "name": "LAWYER"
+  }
 ]

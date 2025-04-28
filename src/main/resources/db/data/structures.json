@@ -1,5 +1,152 @@
 [
-    { "id": 1, "name": "IT Department" },
-    { "id": 2, "name": "HR Department" },
-    { "id": 3, "name": "Finance Department" }
+  {
+    "name": "Price - Heathcote"
+  },
+  {
+    "name": "Wuckert, Runolfsson and Blanda"
+  },
+  {
+    "name": "Champlin Inc"
+  },
+  {
+    "name": "Hackett and Sons"
+  },
+  {
+    "name": "Beahan, Emmerich and Durgan"
+  },
+  {
+    "name": "Schroeder LLC"
+  },
+  {
+    "name": "Bins, Torphy and Waelchi"
+  },
+  {
+    "name": "Kirlin Group"
+  },
+  {
+    "name": "Pagac, DuBuque and Schroeder"
+  },
+  {
+    "name": "Fay - McClure"
+  },
+  {
+    "name": "Reichert - Zulauf"
+  },
+  {
+    "name": "Lakin, Cormier and Kertzmann"
+  },
+  {
+    "name": "King - Thompson"
+  },
+  {
+    "name": "Prosacco - Fahey"
+  },
+  {
+    "name": "Smith - Schroeder"
+  },
+  {
+    "name": "Weber - Kovacek"
+  },
+  {
+    "name": "Harber - Rutherford"
+  },
+  {
+    "name": "Schaefer, Schuster and Jones"
+  },
+  {
+    "name": "Russel, Zboncak and Reynolds"
+  },
+  {
+    "name": "Keeling Group"
+  },
+  {
+    "name": "Morar LLC"
+  },
+  {
+    "name": "Dietrich, Altenwerth and Vandervort"
+  },
+  {
+    "name": "Rolfson, Johns and Bosco"
+  },
+  {
+    "name": "Auer - Orn"
+  },
+  {
+    "name": "Auer, Trantow and Schimmel"
+  },
+  {
+    "name": "Frami Inc"
+  },
+  {
+    "name": "Hartmann - Pouros"
+  },
+  {
+    "name": "Trantow - Lynch"
+  },
+  {
+    "name": "Abbott - Lemke"
+  },
+  {
+    "name": "Fritsch, Jacobi and Rodriguez"
+  },
+  {
+    "name": "Nienow - Smitham"
+  },
+  {
+    "name": "Heaney - Little"
+  },
+  {
+    "name": "Doyle, Jacobi and Cronin"
+  },
+  {
+    "name": "Turcotte Group"
+  },
+  {
+    "name": "Bosco and Sons"
+  },
+  {
+    "name": "Wilderman - Littel"
+  },
+  {
+    "name": "Marvin, Strosin and Tillman"
+  },
+  {
+    "name": "Bruen Inc"
+  },
+  {
+    "name": "Bogisich, Harvey and Murazik"
+  },
+  {
+    "name": "Lubowitz Group"
+  },
+  {
+    "name": "Powlowski - Jacobson"
+  },
+  {
+    "name": "Abernathy - Cassin"
+  },
+  {
+    "name": "Schumm and Sons"
+  },
+  {
+    "name": "Wisozk - Schmidt"
+  },
+  {
+    "name": "Farrell Inc"
+  },
+  {
+    "name": "Frami, Collier and Bernier"
+  },
+  {
+    "name": "Wintheiser LLC"
+  },
+  {
+    "name": "Oberbrunner - Marquardt"
+  },
+  {
+    "name": "Schulist - Reynolds"
+  },
+  {
+    "name": "Quitzon, D'Amore and Breitenberg"
+  }
 ]
