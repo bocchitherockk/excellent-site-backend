@@ -35,7 +35,7 @@ public class TrainerResponseDto {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.type = type;
+        this.type = trainerType;
         this.employerId = employerId;
     }
 
