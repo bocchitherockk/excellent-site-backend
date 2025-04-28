@@ -1,6 +1,9 @@
 package org.green_building.excellent_training.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.green_building.excellent_training.dtos.EmployerRequestDto;
 import org.green_building.excellent_training.dtos.EmployerResponseDto;
@@ -8,16 +11,19 @@ import org.green_building.excellent_training.entities.Employer;
 import org.green_building.excellent_training.exceptions.NonUniqueValueException;
 import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.repositories.EmployersRepository;
+import org.green_building.excellent_training.repositories.TrainersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployersService {
     private final EmployersRepository employersRepository;
+    private final TrainersRepository trainersRepository;
 
     @Autowired
-    public EmployersService(EmployersRepository employersRepository) {
+    public EmployersService(EmployersRepository employersRepository, TrainersRepository trainersRepository) {
         this.employersRepository = employersRepository;
+        this.trainersRepository = trainersRepository;
     }
 
     public List<EmployerResponseDto> getAll() {
@@ -64,5 +70,20 @@ public class EmployersService {
             .orElseThrow(() -> new ResourceNotFoundException("employer", "id", id));
         this.employersRepository.deleteById(id);
         return EmployerResponseDto.from(employer);
+    }
+
+    public Map<String, List<?>> getEmployersWithTrainersCount() {
+        Map<String, List<?>> result = new HashMap<>();
+        List<String> employerNames = new ArrayList<>();
+        List<Integer> trainerCounts = new ArrayList<>();
+        List<Employer> employers = employersRepository.findAll();
+        for (Employer employer : employers) {
+            employerNames.add(employer.getName());
+            Integer trainerCount = trainersRepository.countByEmployerId(employer.getId());
+            trainerCounts.add(trainerCount);
+        }
+        result.put("names", employerNames);
+        result.put("trainers_count", trainerCounts);
+        return result;
     }
 }

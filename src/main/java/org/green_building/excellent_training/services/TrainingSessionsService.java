@@ -1,8 +1,11 @@
 package org.green_building.excellent_training.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -256,5 +259,27 @@ public class TrainingSessionsService {
         }
 
         throw new ResourceNotFoundException("trainer", "id", trainerId);
+    }
+
+    /**
+     * Gets the sum of budgets for training sessions grouped by domain for the past 5 years
+     * @return Map with domain names as keys and lists of yearly budget sums as values
+     */
+    public Map<String, List<Double>> getSessionsBudgetSumByDomainForPastFiveYears() {
+        Map<String, List<Double>> result = new HashMap<>();
+
+        Integer currentYear = LocalDate.now().getYear();
+        List<Domain> domains = domainsRepository.findAll();
+        for (Domain domain : domains) {
+            String domainName = domain.getName();
+            List<Double> yearlyBudgets = new ArrayList<>();
+            for (int i = 4; i >= 0; i--) {
+                Integer year = currentYear - i;
+                Double budgetSum = trainingSessionsRepository.sumBudgetByDomainAndYear(domain.getId(), year);
+                yearlyBudgets.add(budgetSum);
+            }
+            result.put(domainName, yearlyBudgets);
+        }
+        return result;
     }
 }

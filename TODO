@@ -1,5 +1,5 @@
 /******************** TODO ********************/
-- add responsible functionality(see statistics)
+- add fake test data
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -23,5 +23,6 @@
 - change PUT '/users/{id}' to accept old_password field to verify it
 - change access to endpoints to match the specifications
 - enable CORS
+- add dashboard statistics functionality
 
 /******************** CANCELLED ********************/

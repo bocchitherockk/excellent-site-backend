@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TrainersRepository extends JpaRepository<Trainer, Integer> {
     boolean existsByEmail(String email);
+    Integer countByEmployerId(Integer employerId);
 }

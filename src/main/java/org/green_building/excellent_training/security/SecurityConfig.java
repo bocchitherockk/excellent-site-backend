@@ -64,6 +64,7 @@ public class SecurityConfig {
                                    .requestMatchers("/roles/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/employers/**").hasRole(Role.ADMIN)
                                    */
+                                   .requestMatchers("/dashboard/**").hasAnyRole(Role.RESPONSIBLE, Role.ADMIN)
                                    .anyRequest().denyAll()
                                    )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

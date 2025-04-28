@@ -120,6 +120,20 @@ public class App {
                 3000.0,
                 domain_3
             ));
+            TrainingSession trainingSession_4 = trainingSessionsRepository.save(new TrainingSession(
+                "training session 4",
+                2023,
+                5,
+                9696.0,
+                domain_1
+            ));
+            TrainingSession trainingSession_5 = trainingSessionsRepository.save(new TrainingSession(
+                "training session 5",
+                2022,
+                5,
+                6969.0,
+                domain_1
+            ));
 
             // enroll participants in training sessions
             trainingSession_1.setParticipants(new ArrayList<>(List.of(participant_2, participant_3)));
@@ -128,6 +142,8 @@ public class App {
             trainingSessionsRepository.save(trainingSession_1);
             trainingSessionsRepository.save(trainingSession_2);
             trainingSessionsRepository.save(trainingSession_3);
+            trainingSessionsRepository.save(trainingSession_4);
+            trainingSessionsRepository.save(trainingSession_5);
 
             // Create Employers
             Employer employer_1 = employersRepository.save(new Employer("employer 1"));
