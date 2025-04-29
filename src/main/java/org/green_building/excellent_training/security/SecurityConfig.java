@@ -60,10 +60,8 @@ public class SecurityConfig {
                                    .requestMatchers("/profiles/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/structures/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/domains/**").hasRole(Role.ADMIN)
-                                   /*
                                    .requestMatchers("/roles/**").hasRole(Role.ADMIN)
                                    .requestMatchers("/employers/**").hasRole(Role.ADMIN)
-                                   */
                                    .requestMatchers("/dashboard/**").hasAnyRole(Role.RESPONSIBLE, Role.ADMIN)
                                    .anyRequest().denyAll()
                                    )
