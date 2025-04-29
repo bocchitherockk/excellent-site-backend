@@ -1,5 +1,6 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -112,6 +113,8 @@ public class TrainingSession {
             .durationDays(dto.getDurationDays())
             .budget(dto.getBudget())
             .domain(domain)
+            .participants(new ArrayList<>())
+            .trainers(new ArrayList<>())
             .build();
     }
 

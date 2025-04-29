@@ -116,6 +116,7 @@ public class Participant {
             .phoneNumber(dto.getPhoneNumber())
             .profile(profile)
             .structure(structure)
+            .trainingSessions(null)
             .build();
     }
 

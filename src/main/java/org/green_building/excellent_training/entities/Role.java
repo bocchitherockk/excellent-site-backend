@@ -1,5 +1,6 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,7 @@ public class Role {
         if (dto == null) return null;
         return Role.builder()
             .name(dto.getName())
+            .users(new ArrayList<>())
             .build();
     }
 

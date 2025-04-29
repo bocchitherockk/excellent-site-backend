@@ -116,6 +116,7 @@ public class Trainer {
             .phoneNumber(dto.getPhoneNumber())
             .type(dto.getType())
             .employer(employer)
+            .trainingSessions(null) // we don't want to set the training sessions here, it is controlled by the training session entity
             .build();
     }
 

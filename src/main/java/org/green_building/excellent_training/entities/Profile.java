@@ -1,5 +1,6 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,6 +72,7 @@ public class Profile {
         if (dto == null) return null;
         return Profile.builder()
             .name(dto.getName())
+            .participants(new ArrayList<>())
             .build();
     }
 

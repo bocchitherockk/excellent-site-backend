@@ -96,33 +96,34 @@ public class DataLoader {
 
             List<ParticipantRequestDto> participantDtos = this.loadFromJson(DataLoader.dataDir + "participants.json", new TypeReference<List<ParticipantRequestDto>>() {});
             List<Participant> participants = Participant.from(participantDtos);
-            participantsRepository.saveAll(participants);
+            List<Participant> savedParticipants = participantsRepository.saveAll(participants);
 
             List<TrainerRequestDto> trainerDtos = this.loadFromJson(DataLoader.dataDir + "trainers.json", new TypeReference<List<TrainerRequestDto>>() {});
             List<Trainer> trainers = Trainer.from(trainerDtos);
-            trainersRepository.saveAll(trainers);
+            List<Trainer> savedTrainers = trainersRepository.saveAll(trainers);
 
             List<TrainingSessionRequestDto> trainingSessionDtos = this.loadFromJson(DataLoader.dataDir + "training_sessions.json", new TypeReference<List<TrainingSessionRequestDto>>() {});
             List<TrainingSession> trainingSessions = TrainingSession.from(trainingSessionDtos);
+            List<TrainingSession> savedTrainingSessions = trainingSessionsRepository.saveAll(trainingSessions);
             List<Map<String, Integer>> participations = this.loadFromJson(DataLoader.dataDir + "participations.json", new TypeReference<List<Map<String, Integer>>>() {});
             List<Map<String, Integer>> trains = this.loadFromJson(DataLoader.dataDir + "trains.json", new TypeReference<List<Map<String, Integer>>>() {});
-            for (TrainingSession trainingSession : trainingSessions) {
+            for (TrainingSession trainingSession : savedTrainingSessions) {
                 participations.stream()
                     .filter(p -> p.get("training_session_id").equals(trainingSession.getId()))
                     .forEach(p -> {
                         Integer participantId = p.get("participant_id");
-                        Participant participant = participants.stream().filter(participant1 -> participant1.getId().equals(participantId)).findFirst().orElse(null);
+                        Participant participant = savedParticipants.stream().filter(participant1 -> participant1.getId().equals(participantId)).findFirst().orElse(null);
                         if (participant != null) trainingSession.getParticipants().add(participant);
                     });
                 trains.stream()
                     .filter(t -> t.get("training_session_id").equals(trainingSession.getId()))
                     .forEach(t -> {
                         Integer trainerId = t.get("trainer_id");
-                        Trainer trainer = trainers.stream().filter(trainer1 -> trainer1.getId().equals(trainerId)).findFirst().orElse(null);
+                        Trainer trainer = savedTrainers.stream().filter(trainer1 -> trainer1.getId().equals(trainerId)).findFirst().orElse(null);
                         if (trainer != null) trainingSession.getTrainers().add(trainer);
                     });
             }
-            trainingSessionsRepository.saveAll(trainingSessions);
+            trainingSessionsRepository.saveAll(savedTrainingSessions);
         };
     }
 }

@@ -1,5 +1,6 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,6 @@ public class Employer {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-
     @JsonManagedReference
     private List<Trainer> trainers;
 
@@ -67,6 +67,7 @@ public class Employer {
         if (dto == null) return null;
         return Employer.builder()
             .name(dto.getName())
+            .trainers(new ArrayList<>())
             .build();
     }
 

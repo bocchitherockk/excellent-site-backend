@@ -1,5 +1,6 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,6 +69,7 @@ public class Domain {
         if (dto == null) return null;
         return Domain.builder()
             .name(dto.getName())
+            .trainingSessions(new ArrayList<>())
             .build();
     }
 

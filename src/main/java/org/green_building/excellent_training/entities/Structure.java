@@ -1,5 +1,6 @@
 package org.green_building.excellent_training.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,6 +67,7 @@ public class Structure {
         if (dto == null) return null;
         return Structure.builder()
             .name(dto.getName())
+            .participants(new ArrayList<>())
             .build();
     }
 
