@@ -1,6 +1,4 @@
 /******************** TODO ********************/
-- employers names should not be unique
-- make association tables primary key (composed)
 
 /******************** DONE ********************/
 - change DTO logic inside the service layer and not the controller
@@ -28,3 +26,5 @@
 - add fake test data
 
 /******************** CANCELLED ********************/
+- employers names should not be unique
+- make association tables primary key (composed)

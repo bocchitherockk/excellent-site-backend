@@ -76,7 +76,7 @@ public class TrainingSession {
     private Domain domain;
 
     /********************* participants *********************/
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable (
         name = "participations",
         joinColumns = @JoinColumn (name = "training_session_id"),
@@ -85,7 +85,7 @@ public class TrainingSession {
     private List<Participant> participants;
 
     /********************* trainers *********************/
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable (
         name = "trains",
         joinColumns = @JoinColumn (name = "training_session_id"),

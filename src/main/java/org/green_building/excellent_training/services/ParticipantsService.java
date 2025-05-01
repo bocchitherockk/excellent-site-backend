@@ -131,10 +131,10 @@ public class ParticipantsService {
             }
             participant.setEmail(updates.getEmail());
         }
-        if (updates.getFirstName() != null) participant.setFirstName(updates.getFirstName());
-        if (updates.getLastName() != null) participant.setLastName(updates.getLastName());
+        if (updates.getFirstName()   != null) participant.setFirstName(updates.getFirstName());
+        if (updates.getLastName()    != null) participant.setLastName(updates.getLastName());
         if (updates.getPhoneNumber() != null) participant.setPhoneNumber(updates.getPhoneNumber());
-        if (updates.getProfileId() != null) {
+        if (updates.getProfileId()   != null) {
             Profile profile = this.profilesRepository.findById(updates.getProfileId())
                 .orElseThrow(() -> new ResourceNotFoundException("profile", "id", updates.getProfileId()));
             participant.setProfile(profile);
@@ -150,6 +150,8 @@ public class ParticipantsService {
 
     public List<ParticipantResponseDto> deleteAll() {
         List<Participant> participants = this.participantsRepository.findAll();
+        // Remove all participants from their associated training sessions
+        participants.forEach(participant -> this.cancelParticipantFromTrainingSessions(participant.getId()));
         this.participantsRepository.deleteAll();
         return ParticipantResponseDto.from(participants);
     }
@@ -157,6 +159,8 @@ public class ParticipantsService {
     public ParticipantResponseDto deleteById(Integer id) {
         Participant participant = this.participantsRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("participant", "id", id));
+        // Remove participant from all training sessions
+        this.cancelParticipantFromTrainingSessions(id);
         this.participantsRepository.deleteById(id);
         return ParticipantResponseDto.from(participant);
     }

@@ -204,6 +204,14 @@ public class TrainingSessionsService {
 
     public List<TrainingSessionResponseDto> deleteAll() {
         List<TrainingSession> trainingSessions = this.trainingSessionsRepository.findAll();
+
+        // Clear associations for all sessions first
+        trainingSessions.forEach(session -> {
+            session.getParticipants().clear();
+            session.getTrainers().clear();
+            trainingSessionsRepository.saveAndFlush(session);
+        });
+
         this.trainingSessionsRepository.deleteAll();
         return TrainingSessionResponseDto.from(trainingSessions);
     }
@@ -211,6 +219,12 @@ public class TrainingSessionsService {
     public TrainingSessionResponseDto deleteById(Integer id) {
         TrainingSession trainingSession = this.trainingSessionsRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("training session", "id", id));
+
+        // Clear participants and trainers to remove join table entries
+        trainingSession.getParticipants().clear();
+        trainingSession.getTrainers().clear();
+        trainingSessionsRepository.saveAndFlush(trainingSession); // Flush changes
+
         this.trainingSessionsRepository.deleteById(id);
         return TrainingSessionResponseDto.from(trainingSession);
     }

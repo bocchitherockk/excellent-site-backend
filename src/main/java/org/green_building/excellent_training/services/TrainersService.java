@@ -123,11 +123,11 @@ public class TrainersService {
             }
             trainer.setEmail(updates.getEmail());
         }
-        if (updates.getFirstName() != null) trainer.setFirstName(updates.getFirstName());
-        if (updates.getLastName() != null) trainer.setLastName(updates.getLastName());
+        if (updates.getFirstName()   != null) trainer.setFirstName(updates.getFirstName());
+        if (updates.getLastName()    != null) trainer.setLastName(updates.getLastName());
         if (updates.getPhoneNumber() != null) trainer.setPhoneNumber(updates.getPhoneNumber());
-        if (updates.getType() != null) trainer.setType(updates.getType());
-        if (updates.getEmployerId() != null) {
+        if (updates.getType()        != null) trainer.setType(updates.getType());
+        if (updates.getEmployerId()  != null) {
             Employer employer = this.employersRepository.findById(updates.getEmployerId())
                 .orElseThrow(() -> new ResourceNotFoundException("employer", "id", updates.getEmployerId()));
             trainer.setEmployer(employer);
@@ -138,6 +138,8 @@ public class TrainersService {
 
     public List<TrainerResponseDto> deleteAll() {
         List<Trainer> trainers = this.trainersRepository.findAll();
+        // Remove all trainers from their training sessions first
+        trainers.forEach(trainer -> cancelTrainerFromTrainingSessions(trainer.getId()));
         this.trainersRepository.deleteAll();
         return TrainerResponseDto.from(trainers);
     }
@@ -145,6 +147,8 @@ public class TrainersService {
     public TrainerResponseDto deleteById(Integer id) {
         Trainer trainer = this.trainersRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("trainer", "id", id));
+        // Remove the trainer from all training sessions (clears "trains" join table)
+        this.cancelTrainerFromTrainingSessions(id);
         this.trainersRepository.deleteById(id);
         return TrainerResponseDto.from(trainer);
     }
