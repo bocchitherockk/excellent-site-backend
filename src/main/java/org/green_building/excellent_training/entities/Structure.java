@@ -50,9 +50,7 @@ public class Structure {
     private String name;
 
     @OneToMany (
-        mappedBy = "structure",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+        mappedBy = "structure"
     )
     @JsonManagedReference
     private List<Participant> participants;

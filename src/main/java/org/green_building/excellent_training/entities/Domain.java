@@ -51,9 +51,7 @@ public class Domain {
 
 
     @OneToMany (
-        mappedBy = "domain",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+        mappedBy = "domain"
     )
     @JsonManagedReference
     private List<TrainingSession> trainingSessions;

@@ -8,10 +8,13 @@ import java.util.Map;
 import org.green_building.excellent_training.dtos.EmployerRequestDto;
 import org.green_building.excellent_training.dtos.EmployerResponseDto;
 import org.green_building.excellent_training.entities.Employer;
+import org.green_building.excellent_training.entities.Trainer;
+import org.green_building.excellent_training.entities.TrainingSession;
 import org.green_building.excellent_training.exceptions.NonUniqueValueException;
 import org.green_building.excellent_training.exceptions.ResourceNotFoundException;
 import org.green_building.excellent_training.repositories.EmployersRepository;
 import org.green_building.excellent_training.repositories.TrainersRepository;
+import org.green_building.excellent_training.repositories.TrainingSessionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +22,14 @@ import org.springframework.stereotype.Service;
 public class EmployersService {
     private final EmployersRepository employersRepository;
     private final TrainersRepository trainersRepository;
+    private final TrainingSessionsRepository trainingSessionsRepository;
 
     @Autowired
-    public EmployersService(EmployersRepository employersRepository, TrainersRepository trainersRepository) {
+    public EmployersService(EmployersRepository employersRepository, TrainersRepository trainersRepository, 
+                            TrainingSessionsRepository trainingSessionsRepository) {
         this.employersRepository = employersRepository;
         this.trainersRepository = trainersRepository;
+        this.trainingSessionsRepository = trainingSessionsRepository;
     }
 
     public List<EmployerResponseDto> getAll() {
@@ -61,13 +67,37 @@ public class EmployersService {
 
     public List<EmployerResponseDto> deleteAll() {
         List<Employer> employers = this.employersRepository.findAll();
-        this.employersRepository.deleteAll();
+         employers.forEach(employer -> {
+
+             // Remove trainers from sessions and delete them
+             List<Trainer> trainers = employer.getTrainers();
+            trainers.forEach(trainer -> {
+                List<TrainingSession> sessions = trainer.getTrainingSessions();
+                sessions.forEach(session -> session.getTrainers().remove(trainer));
+                trainingSessionsRepository.saveAll(sessions);
+            });
+            trainersRepository.deleteAll(trainers);
+        });
+this.employersRepository.deleteAll();
         return EmployerResponseDto.from(employers);
     }
 
     public EmployerResponseDto deleteById(Integer id) {
         Employer employer = this.employersRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("employer", "id", id));
+
+         // Remove all trainers from their training sessions first
+        List<Trainer> trainers = employer.getTrainers();
+        trainers.forEach(trainer -> {
+            // Remove trainer from all training sessions (clears "trains" join table)
+            List<TrainingSession> sessions = trainer.getTrainingSessions();
+            sessions.forEach(session -> session.getTrainers().remove(trainer));
+            trainingSessionsRepository.saveAll(sessions); // Flush changes
+        });
+
+        // Delete all trainers associated with the employer
+        trainersRepository.deleteAll(trainers);
+
         this.employersRepository.deleteById(id);
         return EmployerResponseDto.from(employer);
     }

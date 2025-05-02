@@ -50,9 +50,7 @@ public class Employer {
     private String name;
 
     @OneToMany (
-        mappedBy = "employer",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+        mappedBy = "employer"
     )
     @JsonManagedReference
     private List<Trainer> trainers;

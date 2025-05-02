@@ -55,9 +55,7 @@ public class Profile {
     private String name;
 
     @OneToMany (
-        mappedBy = "profile",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+        mappedBy = "profile"
     )
     @JsonManagedReference
     private List<Participant> participants;

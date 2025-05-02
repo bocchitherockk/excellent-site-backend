@@ -66,9 +66,9 @@ public class Role {
     private String name;
 
     @OneToMany (
-        mappedBy = "role", // this is the field in the User class that maps to this Role // this is required in order to avoid creating a relationship table in the database
-        cascade = CascadeType.ALL, // CascadeTypeType.ALL means that all operations (persist, merge, remove, refresh, detach) will be cascaded to the users
-        orphanRemoval = true // removing the user from the List in java will remove it from the database
+        mappedBy = "role" // this is the field in the User class that maps to this Role // this is required in order to avoid creating a relationship table in the database
+        // cascade = CascadeType.ALL, // CascadeTypeType.ALL means that all operations (persist, merge, remove, refresh, detach) will be cascaded to the users
+        // orphanRemoval = true // removing the user from the List in java will remove it from the database
     )
     @JsonManagedReference // this tells jackson that the parent is in charge of serializing the child and prevents the child from serializing the parent // is used to avoid circular references when serializing the object to JSON
     private List<User> users;
